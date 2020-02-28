@@ -11,6 +11,12 @@
     "navigationBarTitleText": "Let's eat！",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "list": [
+      { "text": "首页", "pagePath": "pages/index/index" },
+      { "text": "我", "pagePath": "pages/user/user" }
+    ]
+  },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
 }
