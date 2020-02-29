@@ -1,6 +1,8 @@
 {
     "navigationBarTitleText": "首页",
     "usingComponents": {
-        "header": "../../components/header/header"
+        "header": "../../components/header/header",
+        "i-button": "../../dist/button/index"
+
     }
 }

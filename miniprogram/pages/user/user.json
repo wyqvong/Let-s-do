@@ -1,6 +1,8 @@
 {
     "navigationBarTitleText": "我的中心",
     "usingComponents": {
-        "header": "../../components/header/header"
+        "header": "../../components/header/header",
+        "i-button": "../../dist/button/index"
+
     }
 }
