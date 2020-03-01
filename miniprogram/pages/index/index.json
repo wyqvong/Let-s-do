@@ -3,6 +3,5 @@
     "usingComponents": {
         "header": "../../components/header/header",
         "i-button": "../../dist/button/index"
-
     }
 }
