@@ -1,0 +1,8 @@
+.picks{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start
+}
+.pick_button{
+    margin-bottom: 10rpx;
+}

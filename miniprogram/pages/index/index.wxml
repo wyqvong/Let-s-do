@@ -1,3 +1,5 @@
 <view class="container">
-
+    <i-panel title="今日菜单">
+    <view style="padding: 10rpx;" class="picks"><button wx:for="{{picks}}" type="primary" class="pick_button" size="mini">{{item.name}}</button></view>
+    </i-panel>
 </view>
