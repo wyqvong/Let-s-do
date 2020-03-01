@@ -1,5 +1,18 @@
 <view class="container">
     <i-panel title="今日菜单">
-    <view style="padding: 10rpx;" class="picks"><button wx:for="{{picks}}" type="primary" class="pick_button" size="mini">{{item.name}}</button></view>
+        <view style="padding: 10rpx;" class="picks">
+            <button wx:for="{{picks}}" type="primary" class="pick_button" size="mini">
+                {{item.name}}
+            </button>
+        </view>
+    </i-panel>
+    <i-panel title="选择菜单">
+        <view class="section" >
+            <!-- <view class="section__title"></view> -->
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                <view class="picker">当前选择：{{array[index]}}</view>
+            </picker>
+            <button size="mini" class="pickFood_button">pick!</button>
+        </view>
     </i-panel>
 </view>

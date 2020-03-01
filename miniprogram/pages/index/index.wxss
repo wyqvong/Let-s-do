@@ -6,3 +6,26 @@
 .pick_button{
     margin-bottom: 10rpx;
 }
+
+.picker{
+    display: inline-flex;
+    background-color: khaki;
+    width: 500rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+
+.pickFood_button{
+    display: inline-flex;
+
+}
+
+/*选择器  */
+.section__title{
+    margin-bottom: 20rpx;
+  }
+.section{
+    display: flex;
+    margin: 50rpx 0;
+    font-size: 30rpx;
+}

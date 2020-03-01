@@ -24,7 +24,15 @@ Page({
     },
     {
       name: "方便面"
-    }]
+    }],
+    array: ['选项1', '选项2', '选项3', '选项4'],
+    index: 0,//默认显示位置
+  },
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
   },
 
   /**
