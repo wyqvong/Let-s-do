@@ -8,19 +8,21 @@
         </view>
     </i-panel>
     <i-panel title="选择菜单">
-        <!-- 快捷选择食物 -->
-        <view class="section">
-            <!-- <view class="section__title"></view> -->
-            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name">
-                <view class="picker">当前选择：{{array[index].name}}</view>
-            </picker>
-            <button size="mini" class="pickFood_button">pick!</button>
-        </view>
-        <!-- 手动添加食物 -->
-        <view class="newAdd">
-            <input class="useradd-input" maxlength="10" placeholder="手动输入(最大长度为10)" />
-            <button size="mini" class="pickFood_button">add pick</button>
-        </view>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <!-- 快捷选择食物 -->
+            <view class="section">
+                <!-- <view class="section__title"></view> -->
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name">
+                    <view class="picker">当前选择：{{array[index].name}}</view>
+                </picker>
+                <button size="mini" class="pickFood_button" formType="submit">pick!</button>
+            </view>
+            <!-- 手动添加食物 -->
+            <view class="newAdd">
+                <input class="useradd-input" name="newsfood" maxlength="10" placeholder="手动输入(最大长度为10)" confirm-type="done" />
+                <button size="mini" class="pickFood_button" formType="submit">add pick</button>
+            </view>
+        </form>
     </i-panel>
     <i-panel title="今日幸运食物">
         <view class="pickFood_end">

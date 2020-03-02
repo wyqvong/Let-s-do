@@ -25,24 +25,56 @@ Page({
     {
       name: "方便面"
     }],
-    array: ['选项1', '选项2', '选项3', '选项4'],
+    array: [{
+      name: "兰州拉面"
+    },
+    {
+      name: "螺蛳粉"
+    },
+    {
+      name: "汉堡"
+    },
+    {
+      name: "披萨"
+    },
+    {
+      name: "关东煮"
+    },
+    {
+      name: "麻辣烫"
+    },
+    {
+      name: "方便面"
+    }],
     index: 0,//默认显示位置
-    pickFood: { name: "螺蛳粉" },
-    // allFood:
+    pickFood: { name: "螺蛳粉" }
   },
+  //选择器
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
   },
-
+  // 点击add pick按钮
+  //修改备选食物
+  formSubmit: function (e) {
+    const that = this
+    // console.log(e.detail.value.newsfood)
+    const picks = that.data.picks
+    const newsf = { name: e.detail.value.newsfood }
+    picks.push(newsf)
+    that.setData({
+      picks: picks
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getAllFood();
+    // this.getAllFood();
   },
+  // 查询所有食物
   getAllFood: function () {
     const db = wx.cloud.database()
     const that = this;
@@ -56,6 +88,7 @@ Page({
       }
     })
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
