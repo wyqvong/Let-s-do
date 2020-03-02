@@ -11,8 +11,8 @@
         <!-- 快捷选择食物 -->
         <view class="section">
             <!-- <view class="section__title"></view> -->
-            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                <view class="picker">当前选择：{{array[index]}}</view>
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name">
+                <view class="picker">当前选择：{{array[index].name}}</view>
             </picker>
             <button size="mini" class="pickFood_button">pick!</button>
         </view>
