@@ -1,5 +1,6 @@
 <view class="container">
     <i-panel title="今日菜单">
+        <!-- 已选食物 -->
         <view style="padding: 10rpx;" class="picks">
             <button wx:for="{{picks}}" type="primary" class="pick_button" size="mini">
                 {{item.name}}
@@ -7,12 +8,23 @@
         </view>
     </i-panel>
     <i-panel title="选择菜单">
-        <view class="section" >
+        <!-- 快捷选择食物 -->
+        <view class="section">
             <!-- <view class="section__title"></view> -->
             <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
                 <view class="picker">当前选择：{{array[index]}}</view>
             </picker>
             <button size="mini" class="pickFood_button">pick!</button>
+        </view>
+        <!-- 手动添加食物 -->
+        <view class="newAdd">
+            <input class="useradd-input" maxlength="10" placeholder="手动输入(最大长度为10)" />
+            <button size="mini" class="pickFood_button">add pick</button>
+        </view>
+    </i-panel>
+    <i-panel title="今日幸运食物">
+        <view class="pickFood_end">
+            <text>{{pickFood.name}}</text>
         </view>
     </i-panel>
 </view>
