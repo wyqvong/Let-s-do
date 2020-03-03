@@ -56,14 +56,43 @@ Page({
       index: e.detail.value
     })
   },
+
+  //查找数组元素位置
+  arrIndexOf: function (arr, val) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] == val) return i;
+    }
+    return -1;
+  },
+
+  //删除数组指定位置的元素
+  arrRemove: function (arr, index) {
+    console.log(arr)
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+  },
+
   // 点击add pick按钮
-  formSubmit1:function(e){
+  formSubmit1: function (e) {
     const index = this.data.index
     const newsfood = this.data.array[index].name
     this.changepicks(newsfood)
   },
-  formSubmit2:function(e){
+  formSubmit2: function (e) {
     this.changepicks(e.detail.value.newsfood)
+  },
+
+  //删除已选食物
+  delectFood: function (e) {
+    const that = this;
+    console.log(e.target.dataset.index)
+    const index = e.target.dataset.index
+    const arr = that.data.picks
+    this.arrRemove(arr, index)
+    that.setData({
+      picks: arr
+    })
   },
 
   //修改备选食物
@@ -71,7 +100,7 @@ Page({
     const that = this
     // console.log(e)
     const picks = that.data.picks
-    const newsf = { name: newsfood   }
+    const newsf = { name: newsfood }
     picks.push(newsf)
     that.setData({
       picks: picks
@@ -101,7 +130,7 @@ Page({
   onLoad: function (options) {
     // this.getAllFood();
   },
-  
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

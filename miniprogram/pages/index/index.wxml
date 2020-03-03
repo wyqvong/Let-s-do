@@ -2,7 +2,7 @@
     <i-panel title="今日菜单">
         <!-- 已选食物 -->
         <view style="padding: 10rpx;" class="picks">
-            <button wx:for="{{picks}}" type="primary" class="pick_button" size="mini">
+            <button wx:for="{{picks}}" type="primary" class="pick_button" size="mini" bindtap="delectFood" wx:for-index="index" data-index="{{index}}">
                 {{item.name}}
             </button>
         </view>
