@@ -57,23 +57,27 @@ Page({
     })
   },
   // 点击add pick按钮
+  formSubmit1:function(e){
+    const index = this.data.index
+    const newsfood = this.data.array[index].name
+    this.changepicks(newsfood)
+  },
+  formSubmit2:function(e){
+    this.changepicks(e.detail.value.newsfood)
+  },
+
   //修改备选食物
-  formSubmit: function (e) {
+  changepicks: function (newsfood) {
     const that = this
-    // console.log(e.detail.value.newsfood)
+    // console.log(e)
     const picks = that.data.picks
-    const newsf = { name: e.detail.value.newsfood }
+    const newsf = { name: newsfood   }
     picks.push(newsf)
     that.setData({
       picks: picks
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    // this.getAllFood();
-  },
+
   // 查询所有食物
   getAllFood: function () {
     const db = wx.cloud.database()
@@ -88,6 +92,16 @@ Page({
       }
     })
   },
+
+
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // this.getAllFood();
+  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
