@@ -62,6 +62,12 @@ Page({
     that.setData({
       index: 0
     })
+    wx.showToast({
+      title: '添加成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
   // 点击add pick按钮
   formSubmit2: function (e) {
@@ -100,6 +106,12 @@ Page({
     that.setData({
       picks: arr
     })
+    wx.showToast({
+      title: '删除成功',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   },
 
   //修改备选食物
@@ -135,9 +147,20 @@ Page({
     const arr = that.data.picks
     const lucky = arr[Math.floor(Math.random() * arr.length)]
     // console.log(lucky)
-    that.setData({
-      pickFood: lucky
+    wx.showToast({
+      title: '嘟嘟嘟嘟嘟',
+      icon: 'loading',
+      duration: 1000,
+      mask: true
     })
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(that.setData({
+          pickFood: lucky
+        }))
+      }, 1000)
+    })
+    
   },
 
   //判断食物是否已选
