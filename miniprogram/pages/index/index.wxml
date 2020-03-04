@@ -21,7 +21,7 @@
         <form bindsubmit="formSubmit2" bindreset="formReset">
             <!-- 手动添加食物 -->
             <view class="newAdd">
-                <input class="useradd-input" name="newsfood" maxlength="10" placeholder="手动输入(最大长度为10)" confirm-type="done" />
+                <input class="useradd-input" name="newsfood" maxlength="10" placeholder="手动输入(最大长度为10)" confirm-type="done" value="{{value}}" />
                 <button size="mini" class="pickFood_button" formType="submit">add pick</button>
             </view>
         </form>

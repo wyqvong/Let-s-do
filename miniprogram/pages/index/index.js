@@ -27,9 +27,9 @@ Page({
       name: "方便面"
     }],
     index: 0,//默认显示位置
-    pickFood: { name: " " }
+    pickFood: { name: " " },
   },
-  //选择器
+  //普通选择器
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -53,14 +53,41 @@ Page({
     }
   },
 
-  // 点击add pick按钮
+  // 点击pick按钮
   formSubmit1: function (e) {
-    const index = this.data.index
-    const newsfood = this.data.array[index].name
-    this.changepicks(newsfood)
+    const that = this
+    const index = that.data.index
+    const newsfood = that.data.array[index].name
+    that.addpicks(newsfood)
+    that.setData({
+      index: 0
+    })
   },
+  // 点击add pick按钮
   formSubmit2: function (e) {
-    this.changepicks(e.detail.value.newsfood)
+    const that = this
+    let value = e.detail.value.newsfood
+    // console.log(value)
+    if (value == '') {
+      wx: wx.showToast({
+        title: '请输入食物名字',
+        duration: 1000,
+        icon:'loading'
+      })
+      return false
+    }else{
+      that.addpicks(e.detail.value.newsfood)
+      that.setData({
+        value: ''
+      })
+      wx.showToast({
+        title: '添加成功',
+        icon: 'succes',
+        duration: 1000,
+        mask: true
+      })
+    }
+    
   },
 
   //删除已选食物
@@ -76,7 +103,7 @@ Page({
   },
 
   //修改备选食物
-  changepicks: function (newsfood) {
+  addpicks: function (newsfood) {
     const that = this
     // console.log(e)
     const picks = that.data.picks
@@ -111,6 +138,11 @@ Page({
     that.setData({
       pickFood: lucky
     })
+  },
+
+  //判断食物是否已选
+  judgePicks: function () {
+    const that = this
   },
 
   /**
