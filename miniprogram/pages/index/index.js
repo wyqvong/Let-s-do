@@ -4,27 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picks: [{
-      name: "兰州拉面"
-    },
-    {
-      name: "螺蛳粉"
-    },
-    {
-      name: "汉堡"
-    },
-    {
-      name: "披萨"
-    },
-    {
-      name: "关东煮"
-    },
-    {
-      name: "麻辣烫"
-    },
-    {
-      name: "方便面"
-    }],
+    picks: [],
     array: [{
       name: "兰州拉面"
     },
@@ -47,7 +27,7 @@ Page({
       name: "方便面"
     }],
     index: 0,//默认显示位置
-    pickFood: { name: "螺蛳粉" }
+    pickFood: { name: " " }
   },
   //选择器
   bindPickerChange: function (e) {
@@ -122,13 +102,22 @@ Page({
     })
   },
 
-
+  //随机选择幸运食物
+  getLuckyFood: function () {
+    const that = this;
+    const arr = that.data.picks
+    const lucky = arr[Math.floor(Math.random() * arr.length)]
+    // console.log(lucky)
+    that.setData({
+      pickFood: lucky
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getAllFood();
+    this.getAllFood();
   },
 
 

@@ -31,4 +31,7 @@
             <text>{{pickFood.name}}</text>
         </view>
     </i-panel>
+    <button class="getLucky_button"  bindtap="getLuckyFood">
+        冲冲冲
+    </button>
 </view>
