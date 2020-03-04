@@ -16,7 +16,6 @@
 |---|----|----|
 |_id|string|69105b50-dda5-463d-a041-361299b513f0|
 |name|string|方便面|
-|area|string|全球|
 |time|string|三餐|
 
 ## 项目工具
