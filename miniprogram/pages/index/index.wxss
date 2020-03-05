@@ -15,11 +15,6 @@
     line-height: 60rpx;
 }
 
-.pickFood_button{
-    display: inline-flex;
-
-}
-
 /*选择器  */
 .section__title{
     margin-bottom: 20rpx;
@@ -29,3 +24,46 @@
     margin: 50rpx 0;
     font-size: 30rpx;
 }
+.food_picker{
+    display: flex;
+    flex: 6;
+}
+
+.picker{
+    display: flex;
+    margin: 0rpx 30rpx 0rpx 30rpx;
+    width: 400rpx;
+    border-radius: 3%;
+    justify-content: center;
+    word-spacing:8px; 
+    letter-spacing: 1px; 
+    color: rgb(95, 170, 255);
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+
+.pickFood_button{
+    display: flex;
+    flex: 2;
+    color: rgb(250, 123, 76);
+    background-color: rgba(63, 212, 205, 0.699);
+    margin-right: 20rpx;
+}
+
+/* 手动添加食物 */
+.newAdd{
+    display: flex;
+
+}
+.useradd-input{
+    margin: 0rpx 30rpx 0rpx 30rpx;
+    padding-left: 30rpx;
+    width: 400rpx;
+    display: flex;
+    flex: 6;
+}
+.pickFood_button{
+    display: flex;
+    flex: 2;
+}
+
+/* 幸运食物 */

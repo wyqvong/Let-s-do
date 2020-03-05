@@ -78,10 +78,10 @@ Page({
       wx: wx.showToast({
         title: '请输入食物名字',
         duration: 1000,
-        icon:'loading'
+        icon: 'loading'
       })
       return false
-    }else{
+    } else {
       that.addpicks(e.detail.value.newsfood)
       that.setData({
         value: ''
@@ -93,7 +93,7 @@ Page({
         mask: true
       })
     }
-    
+
   },
 
   //删除已选食物
@@ -160,7 +160,7 @@ Page({
         }))
       }, 1000)
     })
-    
+
   },
 
   //判断食物是否已选
@@ -180,14 +180,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

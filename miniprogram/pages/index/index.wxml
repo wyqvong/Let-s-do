@@ -2,17 +2,20 @@
     <i-panel title="今日菜单">
         <!-- 已选食物 -->
         <view style="padding: 10rpx;" class="picks">
+            <text class="noPicks" selectable="false" space="false" decode="false" wx:if="{{!picks.length}}">
+                请在下方选择食物
+            </text>
             <button wx:for="{{picks}}" type="primary" class="pick_button" size="mini" bindtap="delectFood" wx:for-index="index" data-index="{{index}}">
                 {{item.name}}
             </button>
         </view>
     </i-panel>
-    <i-panel title="选择菜单">
+    <i-panel title="选择食物">
         <form bindsubmit="formSubmit1" bindreset="formReset">
             <!-- 快捷选择食物 -->
             <view class="section">
                 <!-- <view class="section__title"></view> -->
-                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name">
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name" class="food_picker">
                     <view class="picker">当前选择：{{array[index].name}}</view>
                 </picker>
                 <button size="mini" class="pickFood_button" formType="submit">pick!</button>
