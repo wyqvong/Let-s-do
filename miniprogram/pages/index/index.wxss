@@ -16,6 +16,7 @@
     width: 500rpx;
     height: 60rpx;
     line-height: 60rpx;
+    font-size: 16px;
 }
 
 .noPicks{
@@ -23,6 +24,8 @@
     padding: 5rpx 25rpx;
     height: 50rpx;
     line-height: 25rpx;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 /*选择器  */
@@ -68,7 +71,7 @@
 }
 .useradd-input{
     display: flex;
-    margin: 0rpx 100rpx 0rpx 30rpx;
+    margin: 0rpx 75rpx 0rpx 30rpx;
     padding-left: 20rpx;
     /* width: 200rpx; */
     height: 60rpx;
@@ -82,7 +85,7 @@
     width: 100rpx;
     color: #FFF68F;
     background-color: rgba(63, 212, 205, 0.699);
-    flex: 1.65;
+    flex: 1.8;
 }
 
 /* 幸运食物 */
@@ -98,6 +101,8 @@
     text-align: center;
     height: 100rpx;
     line-height: 100rpx;
+    font-size: 20px;
+    /* font-weight: 600; */
 }
 
 /* 冲冲冲按钮 */
