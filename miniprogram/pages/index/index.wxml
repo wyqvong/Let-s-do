@@ -5,7 +5,7 @@
             <text class="noPicks" selectable="false" space="false" decode="false" wx:if="{{!picks.length}}">
                 请在下方选择食物
             </text>
-            <button wx:for="{{picks}}" type="primary" class="pick_button" size="mini" bindtap="delectFood" wx:for-index="index" data-index="{{index}}">
+            <button wx:for="{{picks}}" type="primary" class="picks_button" size="mini" bindtap="delect" wx:for-index="index" data-index="{{index}}">
                 {{item.name}}
             </button>
         </view>
@@ -15,26 +15,26 @@
             <!-- 快捷选择食物 -->
             <view class="section">
                 <!-- <view class="section__title"></view> -->
-                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name" class="food_picker">
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="name" class="_picker">
                     <view class="picker">当前选择：{{array[index].name}}</view>
                 </picker>
-                <button size="mini" class="pickFood_button" formType="submit">pick!</button>
+                <button size="mini" class="pick1_button" formType="submit">pick!</button>
             </view>
         </form>
         <form bindsubmit="formSubmit2" bindreset="formReset">
             <!-- 手动添加食物 -->
             <view class="newAdd">
-                <input class="useradd-input" name="newsfood" maxlength="10" placeholder="手动输入(最大长度为10)" confirm-type="done" value="{{value}}" />
-                <button size="mini" class="pickFood_button" formType="submit">add pick</button>
+                <input class="useradd-input" name="news" maxlength="10" placeholder="手动输入(最大长度为10)" confirm-type="done" value="{{value}}" />
+                <button size="mini" class="pick2_button" formType="submit">add pick</button>
             </view>
         </form>
     </i-panel>
     <i-panel title="今日幸运食物">
-        <view class="pickFood_end">
-            <text>{{pickFood.name}}</text>
+        <view class="pick_end">
+            <text>{{pick.name}}</text>
         </view>
     </i-panel>
-    <button class="getLucky_button"  bindtap="getLuckyFood">
+    <button class="getLucky_button"  bindtap="getLucky">
         冲冲冲
     </button>
 </view>

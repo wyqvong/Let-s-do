@@ -1,18 +1,28 @@
+/* 今日菜单 */
 .picks{
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-start
+    align-content: flex-start;
 }
-.pick_button{
+.picks_button{
     margin-bottom: 10rpx;
+    /* max-width: 200rpx; */
+    min-width: 50rpx;
 }
 
 .picker{
     display: inline-flex;
-    background-color: khaki;
+    background-color: #FFF68F;
     width: 500rpx;
     height: 60rpx;
     line-height: 60rpx;
+}
+
+.noPicks{
+    display: block;
+    padding: 5rpx 25rpx;
+    height: 50rpx;
+    line-height: 25rpx;
 }
 
 /*选择器  */
@@ -24,7 +34,7 @@
     margin: 50rpx 0;
     font-size: 30rpx;
 }
-.food_picker{
+._picker{
     display: flex;
     flex: 6;
 }
@@ -41,29 +51,59 @@
     font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
 }
 
-.pickFood_button{
+.pick1_button{
     display: flex;
     flex: 2;
-    color: rgb(250, 123, 76);
+    color: #FFF68F;
     background-color: rgba(63, 212, 205, 0.699);
     margin-right: 20rpx;
+    text-shadow: 0px 2px 1px #83ACDB;
 }
 
 /* 手动添加食物 */
 .newAdd{
     display: flex;
+    margin-bottom: 30rpx;
 
 }
 .useradd-input{
-    margin: 0rpx 30rpx 0rpx 30rpx;
-    padding-left: 30rpx;
-    width: 400rpx;
     display: flex;
-    flex: 6;
+    margin: 0rpx 100rpx 0rpx 30rpx;
+    padding-left: 20rpx;
+    /* width: 200rpx; */
+    height: 60rpx;
+    flex: 4;
+    background-color: #FFF68F;
 }
-.pickFood_button{
+.pick2_button{
+    text-shadow: 0px 2px 1px #83ACDB;
     display: flex;
-    flex: 2;
+    margin-right: 20rpx;
+    width: 100rpx;
+    color: #FFF68F;
+    background-color: rgba(63, 212, 205, 0.699);
+    flex: 1.65;
 }
 
 /* 幸运食物 */
+.pick_end{
+    background-color: rgba(28, 152, 253, 0.863);
+    height: 100rpx;
+    display: flex;
+    justify-content: center;
+}
+.pick_end text{
+    display: block;
+    color: white;
+    text-align: center;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
+/* 冲冲冲按钮 */
+.getLucky_button{
+    margin-top: 30rpx;
+    background-color: rgb(250, 123, 76);
+    color: white;
+    text-shadow: 0px 2px 1px #83ACDB;
+}
