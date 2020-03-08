@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "Let's shopping！",
+      "usingComponents": {
+          "header": "../../components/header/header",
+          "i-button": "../../dist/button/index",
+          "i-panel": "../../dist/panel/index"
+      }
+}

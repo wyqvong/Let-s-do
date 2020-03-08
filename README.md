@@ -52,6 +52,8 @@
 
 - 3.6 完善样式
 
+- 3.8
+
 ## 小程序开发参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)

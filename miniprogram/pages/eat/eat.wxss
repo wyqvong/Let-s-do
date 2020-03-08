@@ -1,0 +1,114 @@
+/* pages/eat/eat.wxss *//* 今日菜单 */
+.picks{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.picks_button{
+    margin-bottom: 10rpx;
+    /* max-width: 200rpx; */
+    min-width: 50rpx;
+}
+
+.picker{
+    display: inline-flex;
+    background-color: #FFF68F;
+    width: 500rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 16px;
+}
+
+.noPicks{
+    display: block;
+    padding: 5rpx 25rpx;
+    height: 50rpx;
+    line-height: 25rpx;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/*选择器  */
+.section__title{
+    margin-bottom: 20rpx;
+  }
+.section{
+    display: flex;
+    margin: 50rpx 0;
+    font-size: 30rpx;
+}
+._picker{
+    display: flex;
+    flex: 6;
+}
+
+.picker{
+    display: flex;
+    margin: 0rpx 30rpx 0rpx 30rpx;
+    width: 400rpx;
+    border-radius: 3%;
+    justify-content: center;
+    word-spacing:8px; 
+    letter-spacing: 1px; 
+    color: rgb(95, 170, 255);
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+
+.pick1_button{
+    display: flex;
+    flex: 2;
+    color: #FFF68F;
+    background-color: rgba(63, 212, 205, 0.699);
+    margin-right: 20rpx;
+    text-shadow: 0px 2px 1px #83ACDB;
+}
+
+/* 手动添加食物 */
+.newAdd{
+    display: flex;
+    margin-bottom: 30rpx;
+
+}
+.useradd-input{
+    display: flex;
+    margin: 0rpx 75rpx 0rpx 30rpx;
+    padding-left: 20rpx;
+    /* width: 200rpx; */
+    height: 60rpx;
+    flex: 4;
+    background-color: #FFF68F;
+}
+.pick2_button{
+    text-shadow: 0px 2px 1px #83ACDB;
+    display: flex;
+    margin-right: 20rpx;
+    width: 100rpx;
+    color: #FFF68F;
+    background-color: rgba(63, 212, 205, 0.699);
+    flex: 1.8;
+}
+
+/* 幸运食物 */
+.pick_end{
+    background-color: rgba(28, 152, 253, 0.863);
+    height: 100rpx;
+    display: flex;
+    justify-content: center;
+}
+.pick_end text{
+    display: block;
+    color: white;
+    text-align: center;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 20px;
+    /* font-weight: 600; */
+}
+
+/* 冲冲冲按钮 */
+.getLucky_button{
+    margin-top: 30rpx;
+    background-color: rgb(250, 123, 76);
+    color: white;
+    text-shadow: 0px 2px 1px #83ACDB;
+}

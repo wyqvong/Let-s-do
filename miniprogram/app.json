@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/user/user"
+    "pages/eat/eat",
+    "pages/user/user",
+    "pages/market/market",
+    "pages/random/random"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
