@@ -1,2 +1,11 @@
 <!--pages/market/market.wxml-->
-<text>pages/market/market.wxml</text>
+<view class="container" hover-class="none" hover-stop-propagation="false">
+    <map id="myMap" style="width: 100%; height: 600rpx;" 
+    show-location
+    show-scale
+    bindcontroltap="controltap"
+    longitude="{{longitude}}" 
+    latitude="{{latitude}}" 
+    scale="{{scale}}" 
+    markers="{{markers}}"></map>
+</view>

@@ -1,5 +1,4 @@
 <view class="container">
-    <header></header>
     <view class="main">
         <navigator class="to_eat" url="/pages/eat/eat" hover-class="navigator-hover">
             Let's go eat !
