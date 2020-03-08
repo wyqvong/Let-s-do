@@ -6,86 +6,46 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitude: '108.653665',
-    latitude: '35.067043',
+    longitude: '',
+    latitude: '',
     markers: [],
     scale: '15',
-    listData: [
-      {
-        "id": 1,
-        "placeName": "照金国际滑雪场",
-        "placeOpenTime": 1505854800,
-        "placeCloseTime": 1505919600,
-        "placeAddress": "照金国际滑雪场",
-        "placeLongitude": "108.653665",
-        "placeLatitude": "35.067043"
-      }, {
-        "id": 2,
-        "placeName": "竹林畔滑雪场",
-        "placeOpenTime": 1506286800,
-        "placeCloseTime": 1506258000,
-        "placeAddress": "竹林畔滑雪场",
-        "placeLongitude": "109.265771",
-        "placeLatitude": "34.013217"
-      }, {
-        "id": 3,
-        "placeName": "西安翠华山滑雪场",
-        "placeOpenTime": 1506200400,
-        "placeCloseTime": 1506265200,
-        "placeAddress": "西安翠华山滑雪场",
-        "placeLongitude": "109.030145",
-        "placeLatitude": "33.974409"
-      }, {
-        "id": 4,
-        "placeName": "袁家村九嵕山必捷滑雪场",
-        "placeOpenTime": 1506243600,
-        "placeCloseTime": 1506265200,
-        "placeAddress": "袁家村九嵕山必捷滑雪场",
-        "placeLongitude": "108.532186",
-        "placeLatitude": "34.613629"
-      }, {
-        "id": 5,
-        "placeName": "白鹿原滑雪场",
-        "placeOpenTime": 1506286800,
-        "placeCloseTime": 1506351600,
-        "placeAddress": "西安市灞桥区纺织城南6公里处",
-        "placeLongitude": "109.101024",
-        "placeLatitude": "34.222726"
-      }
-    ]
+    locations: []
   },
 
-
+  getLocations: function () {
+    const that = this
+    const db = wx.cloud.database()
+    db.collection('places').get({
+      success: function (res) {
+        const locations = res.data
+        that.setData({
+          locations: locations
+        })
+        wx.getLocation({
+          type: 'wgs84', //返回可以用于wx.openLocation的经纬度
+          success: (res) => {
+            that.setData({
+              markers: that.getSchoolMarkers(),
+              // scale: 12,
+              longitude: res.longitude,
+              latitude: res.latitude
+              // longitude: '108.653665',
+              // latitude: '35.067043'
+            })
+          }
+        })
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
+    const that = this
 
-    // var data = JSON.stringify({
-    //   page: 1,
-    //   pageSize: 10,
-    //   request: {
-    //     placeLongitude: app.globalData.longitude,
-    //     placeLatitude: app.globalData.latitude,
-    //     userId: app.globalData.userId
-    //   }
-    // })
-
-    wx.getLocation({
-      type: 'wgs84', //返回可以用于wx.openLocation的经纬度
-      success: (res) => {
-        that.setData({
-          markers: that.getSchoolMarkers(),
-          scale: 12,
-          // longitude: res.longitude,
-          // latitude: res.latitude
-          longitude: '108.653665',
-          latitude: '35.067043'
-        })
-      }
-    })
+    this.getLocations()
 
     // wx.getSystemInfo({
     //   success: function (res) {
@@ -115,7 +75,7 @@ Page({
 
   getSchoolMarkers() {
     var market = []
-    for (let item of this.data.listData) {
+    for (let item of this.data.locations) {
       let marker1 = this.createMarker(item)
       market.push(marker1)
     }
@@ -138,17 +98,18 @@ Page({
     let marker = {
       iconPath: "/images/bj1.png",
       id: point.id || 0,
-      name: point.placeName || '',
-      title: point.placeName || '',
+      title: point.placeAddress || '',
       latitude: latitude,
       longitude: longitude,
       label: {
         x: -24,
         y: -26,
-        content: point.placeName
+        content: point.placeName,
+        color: "#575757",
+        bgColor: "#ffffff"
       },
-      width: 30,
-      height: 30
+      width: 20,
+      height: 20
     }
     return marker
   },

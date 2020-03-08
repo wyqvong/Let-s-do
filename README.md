@@ -12,6 +12,18 @@
 
 ## 云数据库设计
 
+### places集合
+
+|字段|类型|值|
+|---|----|----|
+|_id|string|369362ab-d943-4e9c-bcf8-56101e8ec289|
+|id|number|1|
+|placeAddress|string|广东技术师范大学(天河学院)|
+|placeLatitude|string|23.259104|
+|placeLongitude|string|113.456706|
+|placeName|string|我们的天院啊|
+
+
 ### foods集合
 
 |字段|类型|值|
