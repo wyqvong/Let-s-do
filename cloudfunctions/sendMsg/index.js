@@ -1,34 +1,35 @@
-// 云函数入口文件
 const cloud = require('wx-server-sdk')
-
 cloud.init()
-
-// 云函数入口函数
-exports.main = async (event, context) => {
+const db = cloud.database()
+exports.main = async(event, context) => {
+  const execTasks = []; //创建待执行任务栈
+  // 1.获取数据库中待执行的定时任务
+  let taskRes = await db.collection('msgTask').limit(100).get()
+  let tasks = taskRes.data;
+  // 2.定时任务是否到达触发时间，时间到了便存入任务栈，并将数据库中的记录删除
+  let now = new Date();
   try {
-    const result = await cloud.openapi.subscribeMessage.send({
-      touser: event.openid,//推送的用户
-      page: 'pages/market/market',//跳转的页面
-      data: {
-        phrase1: {
-          value: '王大大'
-        },
-        date5: {
-          value: '17:15'
-        },
-        date8: {
-          value: '2020-03-09'
-        },
-        thing10: {
-          value: '天院教学楼11栋304'
-        }
-      },
-      templateId: 'hzkDjEh9rV9ljQW5zIFoyHvGpjykgEiZpjmd-zsCh1A'
-    })
-    console.log(result)
-    return result
-  }catch(err){
-    console.log(err)
-    return err
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].execTime <= now) { //判断是否已经过了任务触发时间
+        execTasks.push(tasks[i]); //存入待执行任务栈
+        // 定时任务数据库中删除该任务
+        await db.collection('msgTask').doc(tasks[i]._id).remove()
+      }
+    }
+  } catch (e) {
+    console.error(e)
+  }
+  // 3.处理待执行任务
+  for (let i = 0; i < execTasks.length; i++) {
+    let task = execTasks[i];
+    if (task) { //执行发送方法
+      console.log("send执行了", task.data)
+      const send = require('send.js')//引入发送方法
+      try {
+        await send.send(task.data)//执行发送方法
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 }

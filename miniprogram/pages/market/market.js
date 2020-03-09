@@ -1,3 +1,4 @@
+var dateTimePicker = require('../../utils/dateTimePicker.js')
 // pages/market/market.js
 var app = getApp()
 Page({
@@ -8,11 +9,48 @@ Page({
   data: {
     longitude: '',
     latitude: '',
-    markers: [],
-    scale: '15',
-    locations: []
+    markers: [],//标记集合
+    scale: '15',//地图视野范围
+    locations: [],//地点集合
+    //订阅消息
+    course: '软件工程',
+    courseDate: '2020-01-01',
+    courseTime: '12:00',
+    address: '天院教学楼11栋',
+    //选择器
+    date: '2020-01-01',
+    time: '12:00',
+    dateTimeArray: null,
+    dateTime: null,
+    dateTimeArray1: null,
+    dateTime1: null,
+    startYear: 2020,
+    endYear: 2030
   },
 
+  onLoad() {
+    // 获取完整的年月日 时分秒，以及默认显示的数组
+    var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+    var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+    // 精确到分的处理，将数组的秒去掉
+    var lastArray = obj1.dateTimeArray.pop();
+    var lastTime = obj1.dateTime.pop();
+
+    this.setData({
+      dateTime: obj.dateTime,
+      dateTimeArray: obj.dateTimeArray,
+      dateTimeArray1: obj1.dateTimeArray,
+      dateTime1: obj1.dateTime
+    });
+  },
+  changeDate(e) {
+    this.setData({ date: e.detail.value });
+  },
+  changeTime(e) {
+    this.setData({ time: e.detail.value });
+  },
+
+  // 查询数据库的地址集合
   getLocations: function () {
     const that = this
     const db = wx.cloud.database()
@@ -22,6 +60,7 @@ Page({
         that.setData({
           locations: locations
         })
+        // 形成maekers数组集合
         wx.getLocation({
           type: 'wgs84', //返回可以用于wx.openLocation的经纬度
           success: (res) => {
@@ -39,10 +78,24 @@ Page({
     })
   },
 
+
+  formSubmit: function (e) {
+    let that = this
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+    }).then(res => {
+      let openid = res.result.openid
+      console.log('云函数获取到的openid: ', openid)
+      that.send(openid, e.detail)
+    }).catch(res => {
+      console.log("获取openid失败", res)
+    })
+  },
+
   //用户授权订阅消息
   shouquan: function () {
     wx.requestSubscribeMessage({
-      tmplIds: ['hzkDjEh9rV9ljQW5zIFoyHvGpjykgEiZpjmd-zsCh1A'],//消息模板
+      tmplIds: ['hzkDjEh9rV9ljQW5zIFoyNXI59FIykQRRUK0KNrKPnY'],//消息模板
       success(res) {
         console.log('授权成功', res)
       },
@@ -53,26 +106,28 @@ Page({
   },
 
   //获取用户id并发送消息
-  getOpenidToSendMsg: function () {
-    let that = this
-    wx.cloud.callFunction({
-      name: 'getUserInfo',
-    }).then(res => {
-      let openid = res.result.openid
-      console.log('云函数获取到的openid: ', openid)
-      that.send(openid)
-    }).catch(res => {
-      console.log("获取openid失败", res)
-    })
-  },
+  // getOpenidToSendMsg: function () {
+  //   let that = this
+  //   wx.cloud.callFunction({
+  //     name: 'getUserInfo',
+  //   }).then(res => {
+  //     let openid = res.result.openid
+  //     console.log('云函数获取到的openid: ', openid)
+  //     that.send(openid, that.data.course, that.data.courseDate, that.data.courseTime, that.data.address)
+  //   }).catch(res => {
+  //     console.log("获取openid失败", res)
+  //   })
+  // },
 
 
-  //发送消息到指定用户
-  send(openid) {
+  //发送数据到云数据库
+  send(openid, data) {
     wx.cloud.callFunction({
-      name: "sendMsg",
+      name: "saveFormid",
       data: {
-        openid: openid
+        openid: openid,
+        formid: data.formid,
+        data: data.value
       }
     }).then(res => {
       console.log("推送消息成功", res)
@@ -110,11 +165,12 @@ Page({
     this.mapCtx = wx.createMapContext('myMap')
   },
 
-
+  // 
   controltap(e) {
     this.moveToLocation()
   },
 
+  //通过location集合处理后变成marker集合
   getSchoolMarkers() {
     var market = []
     for (let item of this.data.locations) {
@@ -124,10 +180,12 @@ Page({
     return market
   },
 
+  // 移动到用户当前位置
   moveToLocation: function () {
     this.mapCtx.moveToLocation()
   },
 
+  // 处理横坐标
   strSub: function (a) {
     var str = a.split(".")[1]
     str = str.substring(0, str.length - 1)
