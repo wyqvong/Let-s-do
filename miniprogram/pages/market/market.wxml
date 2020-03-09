@@ -8,4 +8,9 @@
     latitude="{{latitude}}" 
     scale="{{scale}}" 
     markers="{{markers}}"></map>
+
+    <view class="messageTip_button">
+        <button bindtap="shouquan" type="warn">请点击按钮订阅消息提醒</button>
+        <button bindtap="getOpenidToSendMsg">获取用户的openid并推送消息</button>
+    </view>
 </view>

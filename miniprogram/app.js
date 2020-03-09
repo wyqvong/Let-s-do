@@ -6,6 +6,7 @@ App({
   onLaunch: function () {
     wx.cloud.init({
       traceUser: true,
+      env: 'text1-cl3f9'
     })
   },
 

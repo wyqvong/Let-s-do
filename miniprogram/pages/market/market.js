@@ -39,6 +39,48 @@ Page({
     })
   },
 
+  //用户授权订阅消息
+  shouquan: function () {
+    wx.requestSubscribeMessage({
+      tmplIds: ['hzkDjEh9rV9ljQW5zIFoyHvGpjykgEiZpjmd-zsCh1A'],//消息模板
+      success(res) {
+        console.log('授权成功', res)
+      },
+      fail(res) {
+        console.log('授权失败', res)
+      }
+    })
+  },
+
+  //获取用户id并发送消息
+  getOpenidToSendMsg: function () {
+    let that = this
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+    }).then(res => {
+      let openid = res.result.openid
+      console.log('云函数获取到的openid: ', openid)
+      that.send(openid)
+    }).catch(res => {
+      console.log("获取openid失败", res)
+    })
+  },
+
+
+  //发送消息到指定用户
+  send(openid) {
+    wx.cloud.callFunction({
+      name: "sendMsg",
+      data: {
+        openid: openid
+      }
+    }).then(res => {
+      console.log("推送消息成功", res)
+    }).catch(res => {
+      console.log("推送消息失败", res)
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
