@@ -1,22 +1,21 @@
-const rp = require('request-promise');//npm引用request-promise包,可用可不用
-const sendTemplateMsg = async (token, msgid, msgData, openid, formid, page) => {
-  console.log("发送数据", "token:", token, "msgid:", msgid, "msgData:", msgData, "openid:", openid, "formid:", formid,"page:" ,page)
-  await rp({
-    json: true,
-    method: 'POST',
-    uri: 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + token,
-    body: {
+const cloud = require('wx-server-sdk')
+const sendTemplateMsg = async (templateId, msgData, openid, page) => {
+  console.log("发送数据", "templateId:", templateId, "msgData:", msgData, "openid:", openid, "page:", page)
+  try {
+    const result = await cloud.openapi.subscribeMessage.send({
       touser: openid,
-      template_id: msgid,
       page: page,
-      form_id: formid,
-      data: msgData
-    }
-  }).then(res => {
-    console.log("发送成功", res)
-  }).catch(err => {
-    console.error(err)
-  })
+      lang: 'zh_CN',
+      data: msgData,
+      templateId: templateId,
+      // miniprogramState: 'developer'
+    })
+    console.log(result)
+    return result
+  } catch (err) {
+    console.log(err)
+    return err
+  }
 }
 module.exports = {
   sendTemplateMsg: sendTemplateMsg

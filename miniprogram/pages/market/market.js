@@ -84,11 +84,10 @@ Page({
       let openid = res.result.openid
       console.log('云函数获取到的openid: ', openid)
       const formData = {
-        formid: e.formid,
         date: that.data.date,
         time: that.data.time,
-        course: that.date.course,
-        address: that.date.address
+        course: that.data.course,
+        address: that.data.address
       }
       that.send(openid, formData)
     }).catch(res => {
@@ -127,10 +126,9 @@ Page({
   //发送数据到云数据库
   send(openid, data) {
     wx.cloud.callFunction({
-      name: "saveFormid",
+      name: "saveFormData",
       data: {
         openid: openid,
-        formid: data.formid,
         formData: data
       }
     }).then(res => {

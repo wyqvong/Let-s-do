@@ -5,9 +5,9 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-        return saveFormid(event)
+        return save(event)
 }
-async function saveFormid(event) {
+async function save(event) {
   let time = new Date();
   time.setHours(14, 0, 0, 0)//设定推送时间，可根据需求调整
   console.log(event)
