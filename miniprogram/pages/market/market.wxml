@@ -1,8 +1,14 @@
 <!-- pages/market/market.wxml -->
 <view class="container" hover-class="none" hover-stop-propagation="false">
-    <map id="myMap" style="width: 100%; height: 600rpx;" show-location show-scale bindcontroltap="controltap" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}"></map>
+    <!-- <map id="myMap" style="width: 100%; height: 600rpx;" show-location show-scale bindcontroltap="controltap" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}"></map> -->
     <view class="messageTip">
         <form report-submit="true" bindsubmit="formSubmit" bindreset="formReset">
+            <view class="input-content">
+                <i-panel title="What do you want to do?">
+                    <i-input value="{{ course }}" type="text" title="课程名字" placeholder="请输入课程名字" />
+                    <i-input value="{{ address }}" type="text" title="教室地址" placeholder="请输入教室详细地址(最多20字)" maxlength="20" />
+                </i-panel>
+            </view>
             <view class="picker-content">
                 <view class="picker-name">选择年月日</view>
                 <picker mode="date" value="{{date}}" start="2020-01-01" end="2030-01-01" bindchange="changeDate">
@@ -12,7 +18,6 @@
                 <picker mode="time" value="{{time}}" start="06:00" end="22:30" bindchange="changeTime">
                     <view class="tui-picker-detail">上课时间 {{time}}</view>
                 </picker>
-                <input class="course" />
             </view>
             <button formType="submit" bindtap="shouquan" type="primary">提交表单</button>
         </form>

@@ -1,1 +1,14 @@
 /* pages/market/market.wxss */
+/* 时间选择器 */
+.picker-content{
+    padding: 10rpx 35rpx;
+    background-color: #fff;
+    /* font-weight: 400; */
+}
+.picker-name{
+    font-size: 27rpx;
+}
+.tui-picker-detail{
+    font-size: 25rpx;
+
+}

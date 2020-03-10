@@ -25,21 +25,22 @@ Page({
     endYear: 2030
   },
 
-  onLoad() {
-    // 获取完整的年月日 时分秒，以及默认显示的数组
-    var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-    var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-    // 精确到分的处理，将数组的秒去掉
-    var lastArray = obj1.dateTimeArray.pop();
-    var lastTime = obj1.dateTime.pop();
+  // onLoad() {
+  //   // 获取完整的年月日 时分秒，以及默认显示的数组
+  //   var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+  //   var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+  //   // 精确到分的处理，将数组的秒去掉
+  //   var lastArray = obj1.dateTimeArray.pop();
+  //   var lastTime = obj1.dateTime.pop();
 
-    this.setData({
-      dateTime: obj.dateTime,
-      dateTimeArray: obj.dateTimeArray,
-      dateTimeArray1: obj1.dateTimeArray,
-      dateTime1: obj1.dateTime
-    });
-  },
+  //   this.setData({
+  //     dateTime: obj.dateTime,
+  //     dateTimeArray: obj.dateTimeArray,
+  //     dateTimeArray1: obj1.dateTimeArray,
+  //     dateTime1: obj1.dateTime
+  //   });
+  // },
+
   changeDate(e) {
     this.setData({ date: e.detail.value });
   },
@@ -144,7 +145,7 @@ Page({
   onLoad: function (options) {
     const that = this
 
-    this.getLocations()
+    // this.getLocations()
 
     // wx.getSystemInfo({
     //   success: function (res) {

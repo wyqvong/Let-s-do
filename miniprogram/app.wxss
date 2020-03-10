@@ -1,4 +1,8 @@
 page,view,image,swiper,swiper-item,navigator,video{
   box-sizing: border-box;
   font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+  
+}
+page{
+  background-color: rgb(212, 212, 212);
 }
