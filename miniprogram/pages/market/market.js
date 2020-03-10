@@ -12,10 +12,7 @@ Page({
     markers: [],//标记集合
     scale: '15',//地图视野范围
     locations: [],//地点集合
-    //订阅消息
     course: '软件工程',
-    courseDate: '2020-01-01',
-    courseTime: '12:00',
     address: '天院教学楼11栋',
     //选择器
     date: '2020-01-01',
@@ -86,7 +83,14 @@ Page({
     }).then(res => {
       let openid = res.result.openid
       console.log('云函数获取到的openid: ', openid)
-      that.send(openid, e.detail)
+      const formData = {
+        formid: e.formid,
+        date: that.data.date,
+        time: that.data.time,
+        course: that.date.course,
+        address: that.date.address
+      }
+      that.send(openid, formData)
     }).catch(res => {
       console.log("获取openid失败", res)
     })
@@ -127,12 +131,12 @@ Page({
       data: {
         openid: openid,
         formid: data.formid,
-        data: data.value
+        formData: data
       }
     }).then(res => {
-      console.log("推送消息成功", res)
+      console.log("发送信息到云函数成功", res)
     }).catch(res => {
-      console.log("推送消息失败", res)
+      console.log("发送信息到云函数失败", res)
     })
   },
 

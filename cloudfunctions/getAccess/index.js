@@ -1,6 +1,9 @@
 cloud = require('wx-server-sdk');
 const rq = require('request-promise')//通过npm引入request-promise包,可用可不用
-cloud.init()
+cloud.init({
+  traceUser: true,
+  env: 'text1-cl3f9'
+})
 const db = cloud.database();
 const APPID = 'wx9339985e6fae83dc';
 const APPSECRET = 'a94949a0d3da0871ea9a3aa8f93958eb';
