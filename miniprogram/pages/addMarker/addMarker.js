@@ -5,8 +5,50 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    lagitude: '',
+    longitude: '',
+    address: '',
+    name:'请输入地址别名',
+    id:0
   },
+
+  bindKeyInput: function (e) {
+    this.setData({
+      name: e.detail.value
+    })
+  },
+
+  formSubmit:function(){
+    console.log(this.data)
+  },
+
+  mapclick: function () {
+    const that = this;
+    console.log("地图点击");
+    wx.chooseLocation({
+      success: function (res) {
+        console.log("地图点击事件：" + JSON.stringify(res));
+        var longitude = res.longitude;
+        var lagitude = res.latitude;
+        var address = res.address;
+        that.setData({
+          lagitude: lagitude,
+          longitude: longitude,
+          address: address,
+        });
+        //移动marker
+        that.mapCtx.moveToLocation();
+      },
+      fail: function (res) {
+        console.log("点击地图fail:" + JSON.stringify(res));
+      },
+      complete: function (res) {        // complete
+        console.log("点击地图complete:" + JSON.stringify(res));
+      }
+    })
+  },
+
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -19,7 +61,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.mapCtx = wx.createMapContext('map')
   },
 
   /**

@@ -42,6 +42,24 @@ Page({
   //   });
   // },
 
+  bindKeyInput1: function (e) {
+    this.setData({
+      course: e.detail.value
+    })
+  },
+
+  bindKeyInput2: function (e) {
+    this.setData({
+      address: e.detail.value
+    })
+  },
+
+  bindKeyInput3: function (e) {
+    this.setData({
+      room: e.detail.value
+    })
+  },
+
   changeDate(e) {
     this.setData({ date: e.detail.value });
   },

@@ -1,1 +1,9 @@
-<text>pages/addMarker/addMarker.wxml</text>
+<view class="container">
+    <map id="myMap" style="width: 100%; height: 600rpx;" show-location show-scale bindtap='mapclick' longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}"></map>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <i-panel title="请输入标记点信息">
+            <input bindinput="bindKeyInput"  placeholder="请输入地址别名(最多20字)" maxlength="20" />
+        </i-panel>
+        <button formType="submit" type="primary">创建</button>
+    </form>
+</view>
