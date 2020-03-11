@@ -5,11 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lagitude: '',
+    latitude: '',
     longitude: '',
     address: '',
-    name:'请输入地址别名',
-    id:0
+    name: '请输入地址别名',
+    id: null
+  },
+
+  getLastId: function () {
+    const that = this
+    const db = wx.cloud.database()
+    db.collection('places').where({}).orderBy('id', 'desc').limit(1).get({
+      success: function (res) {
+        const id = (res.data[0].id) + 1
+        console.log(id)
+        that.setData({
+          id: id
+        })
+      }
+    })
+
   },
 
   bindKeyInput: function (e) {
@@ -18,21 +33,32 @@ Page({
     })
   },
 
-  formSubmit:function(){
+  formSubmit: function () {
+    const that = this
     console.log(this.data)
-  },
+    const db = wx.cloud.database()
+    db.collection('places').add({
+      data: {
+        id: that.data.id,
+        placeAddress: that.data.address,
+        placeLatitude: that.data.latitude,
+        placeLongitude: that.data.longitude,
+        placeName: that.data.name
+      }
+    })
 
+  },
   mapclick: function () {
     const that = this;
     console.log("地图点击");
     wx.chooseLocation({
       success: function (res) {
         console.log("地图点击事件：" + JSON.stringify(res));
-        var longitude = res.longitude;
-        var lagitude = res.latitude;
+        var longitude = res.longitude.toString();
+        var latitude = res.latitude.toString();
         var address = res.address;
         that.setData({
-          lagitude: lagitude,
+          latitude: latitude,
           longitude: longitude,
           address: address,
         });
@@ -54,7 +80,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getLastId()
   },
 
   /**
@@ -62,6 +88,7 @@ Page({
    */
   onReady: function () {
     this.mapCtx = wx.createMapContext('map')
+
   },
 
   /**
