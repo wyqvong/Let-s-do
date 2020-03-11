@@ -13,7 +13,8 @@ Page({
     scale: '20',//地图视野范围
     locations: [],//地点集合
     course: '软件工程',
-    address: '天院教学楼11栋',
+    address: '',
+    room:'3#301',
     //选择器
     date: '2020-01-01',
     time: '12:00',
@@ -88,7 +89,8 @@ Page({
         date: that.data.date,
         time: that.data.time,
         course: that.data.course,
-        address: that.data.address
+        address: that.data.address,
+        room: that.data.room
       }
       that.send(openid, formData)
     }).catch(res => {
@@ -137,35 +139,6 @@ Page({
     }).catch(res => {
       console.log("发送信息到云函数失败", res)
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    const that = this
-
-    this.getLocations()
-
-    // wx.getSystemInfo({
-    //   success: function (res) {
-    //     //设置map高度，根据当前设备宽高满屏显示
-    //     that.setData({
-    //       view: {
-    //         Height: res.windowHeight
-    //       },
-
-    //     })
-    //   }
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    // 使用 wx.createMapContext 获取 map 上下文 
-    this.mapCtx = wx.createMapContext('myMap')
   },
 
 
@@ -226,6 +199,36 @@ Page({
       height: 20
     }
     return marker
+  },
+
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    const that = this
+
+    this.getLocations()
+
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     //设置map高度，根据当前设备宽高满屏显示
+    //     that.setData({
+    //       view: {
+    //         Height: res.windowHeight
+    //       },
+
+    //     })
+    //   }
+    // })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    // 使用 wx.createMapContext 获取 map 上下文 
+    this.mapCtx = wx.createMapContext('myMap')
   },
 
 

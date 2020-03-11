@@ -4,9 +4,10 @@
     <view class="messageTip">
         <form report-submit="true" bindsubmit="formSubmit" bindreset="formReset">
             <view class="input-content">
-                <i-panel title="What do you want to do?">
+                <i-panel title="Where are you going?">
                     <i-input value="{{ course }}" type="text" title="课程名字" placeholder="请输入课程名字" />
-                    <i-input value="{{ address }}" type="text" title="教室地址" placeholder="请输入教室详细地址(最多20字)" maxlength="20" />
+                    <i-input value="{{ address }}" type="text" title="位置" placeholder="请输入地址(最多20字)" maxlength="20" />
+                    <i-input value="{{ room }}" type="text" title="教室" placeholder="请输入教室详细地址(最多15字)" maxlength="15" />
                 </i-panel>
             </view>
             <view class="picker-content">
