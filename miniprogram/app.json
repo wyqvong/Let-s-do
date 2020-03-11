@@ -4,7 +4,8 @@
     "pages/eat/eat",
     "pages/user/user",
     "pages/market/market",
-    "pages/random/random"
+    "pages/random/random",
+    "pages/addMarker/addMarker"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

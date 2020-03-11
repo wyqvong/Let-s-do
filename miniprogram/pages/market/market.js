@@ -14,7 +14,7 @@ Page({
     locations: [],//地点集合
     course: '软件工程',
     address: '',
-    room:'3#301',
+    room: '301',
     //选择器
     date: '2020-01-01',
     time: '12:00',
@@ -77,6 +77,15 @@ Page({
     })
   },
 
+  addMarker: function () {
+    wx.navigateTo({
+      url: '../addMarker/addMarker',
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        console.log("成功跳转到addMarker")
+      }
+    })
+  },
 
   formSubmit: function (e) {
     let that = this
@@ -101,7 +110,7 @@ Page({
   //用户授权订阅消息
   shouquan: function () {
     wx.requestSubscribeMessage({
-      tmplIds: ['hzkDjEh9rV9ljQW5zIFoyNXI59FIykQRRUK0KNrKPnY'],//消息模板
+      tmplIds: ['hzkDjEh9rV9ljQW5zIFoyLGr3RtmLv28L4vjqaSz3bg'],//消息模板
       success(res) {
         console.log('授权成功', res)
       },
@@ -195,8 +204,8 @@ Page({
         color: "#575757",
         bgColor: "#ffffff"
       },
-      width: 20,
-      height: 20
+      width: 30,
+      height: 30
     }
     return marker
   },
@@ -208,7 +217,7 @@ Page({
   onLoad: function (options) {
     const that = this
 
-    this.getLocations()
+
 
     // wx.getSystemInfo({
     //   success: function (res) {
@@ -227,8 +236,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    // 使用 wx.createMapContext 获取 map 上下文 
-    this.mapCtx = wx.createMapContext('myMap')
+
   },
 
 
@@ -236,7 +244,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //获取当前位置和标记点
+    this.getLocations()
+    // 使用 wx.createMapContext 获取 map 上下文 
+    this.mapCtx = wx.createMapContext('myMap')
   },
 
   /**
