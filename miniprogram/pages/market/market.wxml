@@ -9,9 +9,9 @@
         <form report-submit="true" bindsubmit="formSubmit" bindreset="formReset">
             <view class="input-content">
                 <i-panel title="Where are you going?">
-                    <input bindinput="bindKeyInput1" type="text" placeholder="请输入课程名字" />
-                    <input bindinput="bindKeyInput2" value="{{address}}" type="text" placeholder="可双击地图中的标记点快速输入" maxlength="20" />
-                    <input bindinput="bindKeyInput3" type="text" placeholder="请输入教室详细地址(最多15字)" maxlength="15" />
+                    <input class="form_input" bindinput="bindKeyInput1" type="text" placeholder="请输入课程名字" />
+                    <input class="form_input" bindinput="bindKeyInput2" value="{{address}}" type="text" placeholder="可双击地图中的标记点快速输入" maxlength="20" />
+                    <input class="form_input" bindinput="bindKeyInput3" type="text" placeholder="请输入教室详细地址(最多15字)" maxlength="15" />
                 </i-panel>
             </view>
             <view class="picker-content">

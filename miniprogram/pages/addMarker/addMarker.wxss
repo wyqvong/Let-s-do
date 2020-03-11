@@ -1,1 +1,10 @@
 /* pages/addMarker/addMarker.wxss */
+
+.add_input{
+    font-size: 28rpx;
+    padding: 20rpx 40rpx;
+}
+
+button{
+    margin-top: 30rpx;
+}

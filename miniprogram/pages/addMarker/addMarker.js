@@ -5,8 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    latitude: '',
-    longitude: '',
+    scale: '20',//地图视野范围
+    longitude: '113.456706',
+    latitude: '23.259104',
     address: '',
     name: '请输入地址别名',
     id: null
