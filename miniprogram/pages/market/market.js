@@ -7,10 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitude: '',
-    latitude: '',
+    longitude: '113.456706',
+    latitude: '23.259104',
     markers: [],//标记集合
-    scale: '15',//地图视野范围
+    scale: '20',//地图视野范围
     locations: [],//地点集合
     course: '软件工程',
     address: '天院教学楼11栋',
@@ -65,8 +65,8 @@ Page({
             that.setData({
               markers: that.getSchoolMarkers(),
               // scale: 12,
-              longitude: res.longitude,
-              latitude: res.latitude
+              // longitude: res.longitude,
+              // latitude: res.latitude
               // longitude: '108.653665',
               // latitude: '35.067043'
             })
@@ -145,7 +145,7 @@ Page({
   onLoad: function (options) {
     const that = this
 
-    // this.getLocations()
+    this.getLocations()
 
     // wx.getSystemInfo({
     //   success: function (res) {
@@ -168,9 +168,20 @@ Page({
     this.mapCtx = wx.createMapContext('myMap')
   },
 
-  // 
+
+  // 点击控件时触发
   controltap(e) {
     this.moveToLocation()
+  },
+
+  //点击标记点时触发
+  markertap(e) {
+    const that = this
+    let markerId = e.markerId;// 获取点击的markers  id
+    let markername = this.data.markers[markerId - 1].title; // 获取markers名称
+    that.setData({
+      address: markername
+    })
   },
 
   //通过location集合处理后变成marker集合

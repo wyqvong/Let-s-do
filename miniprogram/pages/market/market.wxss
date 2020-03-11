@@ -6,9 +6,12 @@
     /* font-weight: 400; */
 }
 .picker-name{
-    font-size: 27rpx;
+    font-size: 30rpx;
+    padding: 20rpx 0;
 }
 .tui-picker-detail{
-    font-size: 25rpx;
-
+    font-size: 27rpx;
+    padding: 0rpx 0 20rpx 0;
+    border: 0 solid #e9eaec;
+    border-bottom-width: 1px;
 }
