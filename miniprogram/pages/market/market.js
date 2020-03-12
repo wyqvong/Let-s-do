@@ -107,22 +107,32 @@ Page({
 
   formSubmit: function (e) {
     let that = this
-    wx.cloud.callFunction({
-      name: 'getUserInfo',
-    }).then(res => {
-      let openid = res.result.openid
-      console.log('云函数获取到的openid: ', openid)
-      const formData = {
-        date: that.data.date,
-        time: that.data.time,
-        course: that.data.course,
-        address: that.data.address,
-        room: that.data.room
-      }
-      that.send(openid, formData)
-    }).catch(res => {
-      console.log("获取openid失败", res)
-    })
+    if (that.data.course && that.data.address && that.data.time && that.data.date && that.data.room) {
+      that.shouquan()
+      wx.cloud.callFunction({
+        name: 'getUserInfo',
+      }).then(res => {
+        let openid = res.result.openid
+        console.log('云函数获取到的openid: ', openid)
+        const formData = {
+          date: that.data.date,
+          time: that.data.time,
+          course: that.data.course,
+          address: that.data.address,
+          room: that.data.room
+        }
+        that.send(openid, formData)
+      }).catch(res => {
+        console.log("获取openid失败", res)
+      })
+    }else{
+      wx.showToast({
+        title: '表单不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+
   },
 
   //用户授权订阅消息

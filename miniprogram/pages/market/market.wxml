@@ -24,7 +24,7 @@
                     <view class="tui-picker-detail">{{time}}</view>
                 </picker>
             </view>
-            <button formType="submit" bindtap="shouquan" type="primary">提交表单</button>
+            <button formType="submit" type="primary">提交表单</button>
         </form>
     </view>
 </view>

@@ -36,17 +36,25 @@ Page({
 
   formSubmit: function () {
     const that = this
-    console.log(this.data)
-    const db = wx.cloud.database()
-    db.collection('places').add({
-      data: {
-        id: that.data.id,
-        placeAddress: that.data.address,
-        placeLatitude: that.data.latitude,
-        placeLongitude: that.data.longitude,
-        placeName: that.data.name
-      }
-    })
+    if (that.data.name && that.data.address && that.data.latitude && that.data.longitude) {
+      const db = wx.cloud.database()
+      db.collection('places').add({
+        data: {
+          id: that.data.id,
+          placeAddress: that.data.address,
+          placeLatitude: that.data.latitude,
+          placeLongitude: that.data.longitude,
+          placeName: that.data.name
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '表单不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+
 
   },
   mapclick: function () {
