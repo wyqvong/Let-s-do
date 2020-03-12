@@ -4,7 +4,7 @@
             Let's go eat !
         </navigator>
         <navigator class="to_market" url="/pages/market/market" hover-class="navigator-hover">
-            Let's go shopping !
+            I want to
         </navigator>
         <navigator class="to_random" url="/pages/random/random" hover-class="navigator-hover">
             获取一个随机数
