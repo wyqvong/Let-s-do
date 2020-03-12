@@ -73,6 +73,8 @@
 
 - 3.11 完善表单页样式,完成 添加标记点 功能
 
+- 3.12 设置上课前半小时发送推送
+
 ## 小程序开发参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)

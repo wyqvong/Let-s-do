@@ -10,6 +10,7 @@
     font-size: 30rpx;
     background-color: #fff;
     border: 0 solid #e9eaec;
+    border-bottom-width: 1px;
 }
 
 /* 时间选择器 */
@@ -32,10 +33,10 @@
 
 /* 添加标记点 */
 .add_marker_view{
-    position:fixed;
-    top:500rpx;
-    left:10rpx;
-    z-index:999;
+    position: fixed;
+    top: 50rpx;
+    left: 10rpx;
+    z-index: 999;
     text-align: center;
 }
 .add_marker_img{
