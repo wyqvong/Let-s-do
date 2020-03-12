@@ -9,7 +9,7 @@ Page({
     longitude: '113.456706',
     latitude: '23.259104',
     address: '',
-    name: '请输入地址别名',
+    name: '',
     id: null
   },
 
@@ -37,16 +37,36 @@ Page({
   formSubmit: function () {
     const that = this
     if (that.data.name && that.data.address && that.data.latitude && that.data.longitude) {
-      const db = wx.cloud.database()
-      db.collection('places').add({
-        data: {
-          id: that.data.id,
-          placeAddress: that.data.address,
-          placeLatitude: that.data.latitude,
-          placeLongitude: that.data.longitude,
-          placeName: that.data.name
+      try {
+        function p(res, rej) {
+          const db = wx.cloud.database()
+          db.collection('places').add({
+            data: {
+              id: that.data.id,
+              placeAddress: that.data.address,
+              placeLatitude: that.data.latitude,
+              placeLongitude: that.data.longitude,
+              placeName: that.data.name
+            }
+          })
+          res(true)
         }
-      })
+        new Promise(p).then(res => {
+          wx.showToast({
+            title: '提交成功',
+          })
+          that.setData({
+            id: that.data.id+1,
+            address: '',
+            latitude: '23.259104',
+            longitude: '113.456706',
+            name: '',
+          })
+        })
+      } catch (e) {
+        console.error(e)
+      }
+
     } else {
       wx.showToast({
         title: '表单不能为空',

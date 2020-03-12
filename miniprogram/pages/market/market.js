@@ -12,11 +12,11 @@ Page({
     markers: [],//标记集合
     scale: '20',//地图视野范围
     locations: [],//地点集合
-    course: '软件工程',
+    course: '',
     address: '',
-    room: '301',
+    room: '',
     //选择器
-    date: '2020-01-01',
+    date: '2020-03-12',
     time: '12:00',
     dateTimeArray: null,
     dateTime: null,
@@ -165,6 +165,7 @@ Page({
 
   //发送数据到云数据库
   send(openid, data) {
+    const that = this
     wx.cloud.callFunction({
       name: "saveFormData",
       data: {
@@ -173,6 +174,16 @@ Page({
       }
     }).then(res => {
       console.log("发送信息到云函数成功", res)
+      wx.showToast({
+        title: '提交成功',
+      })
+      that.setData({
+        course: '',
+        address: '',
+        room: '',
+        date: '2020-03-12',
+        time: '12:00',
+      })
     }).catch(res => {
       console.log("发送信息到云函数失败", res)
     })
