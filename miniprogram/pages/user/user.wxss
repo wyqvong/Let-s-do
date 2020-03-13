@@ -29,3 +29,7 @@
   background-color: #fff;
   min-height: 790rpx;
 }
+
+.task_card{
+  margin: 0 20rpx;
+}
