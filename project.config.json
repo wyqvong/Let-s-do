@@ -22,7 +22,7 @@
 	},
 	"appid": "wx9339985e6fae83dc",
 	"projectname": "Let's%20eat",
-	"libVersion": "2.10.2",
+	"libVersion": "2.10.3",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -42,13 +42,25 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/market/market",
+					"pathName": "pages/market/market",
+					"query": "address= \"广东技术师范大学天河学院-图书馆\"",
+					"scene": 1014
 				}
 			]
 		}

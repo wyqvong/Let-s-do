@@ -75,6 +75,8 @@
 
 - 3.12 设置上课前半小时发送推送,增加了对表单数据不为空的要求
 
+- 3.13 完善样式
+
 ## 小程序开发参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)

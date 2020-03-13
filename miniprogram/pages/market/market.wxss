@@ -12,6 +12,9 @@
     border: 0 solid #e9eaec;
     border-bottom-width: 1px;
 }
+.form_submit{
+    margin: 20rpx 0;
+}
 
 /* 时间选择器 */
 .picker-content{

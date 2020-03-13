@@ -5,4 +5,20 @@
         </view>
         <open-data type="userNickName"></open-data>
     </view>
+    <view class="task_view" hover-class="none" hover-stop-propagation="false">
+        <i-card wx:for="{{tasks}}" wx:for-index="index" data-index="{{index}}" title="{{item.course}}" extra="取消提醒" bindtap="deleteTask">
+            <view slot="content">
+                <text class="task_text" selectable="false" space="false" decode="false">
+                    时间：{{item.time}}
+                </text>
+                <text class="task_text" selectable="false" space="false" decode="false">
+                    地点：{{item.address}}
+                </text>
+                <text class="task_text" selectable="false" space="false" decode="false">
+                    课室：{{item.room}}
+                </text>
+            </view>
+            <view slot="footer">{{item.date}}</view>
+        </i-card>
+    </view>
 </view>

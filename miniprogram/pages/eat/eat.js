@@ -78,7 +78,7 @@ Page({
 
   //删除已选食物
   delect: function (e) {
-    const that = this;
+    const that = this
     console.log(e.target.dataset.index)
     const index = e.target.dataset.index
     const arr = that.data.picks

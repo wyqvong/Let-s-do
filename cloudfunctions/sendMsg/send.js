@@ -5,7 +5,7 @@ cloud.init()
 const db = cloud.database()
 const send = async data => {
     let openid = data._openid//获取用户openid
-    let page = 'pages/market/market';//模板消息的打开页
+    let page = 'pages/market/market?address=data.formData.address';//模板消息的打开页
     let msgData = {//根据需求自定模板消息的数据
         thing2: {
             value: data.formData.course
