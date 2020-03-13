@@ -4,8 +4,51 @@ Page({
    * 页面的初始数据
    */
   data: {
+    d_index: null,
+    visible5: false,
     openid: null,
-    tasks: []
+    tasks: [],
+    actions5: [
+      {
+        name: '取消'
+      },
+      {
+        name: '删除',
+        color: '#ed3f14',
+        loading: false
+      }
+    ]
+  },
+
+  deleteTip(e) {
+    let index = e.target.dataset.index
+    this.setData({
+      visible5: true,
+      d_index: index
+    });
+  },
+
+  delete({ detail }) {
+    if (detail.index === 0) {
+      this.setData({
+        visible5: false
+      });
+    } else {
+      const action = [...this.data.actions5];
+      action[1].loading = true;
+      this.deleteTask(this.data.d_index)
+      this.setData({
+        actions5: action
+      });
+
+      setTimeout(() => {
+        action[1].loading = false;
+        this.setData({
+          visible5: false,
+          actions5: action
+        });
+      }, 2000);
+    }
   },
 
   getUserInfo: function () {
@@ -59,10 +102,8 @@ Page({
     }
   },
 
-  deleteTask: function (e) {
+  deleteTask: function (index) {
     const that = this
-    const index = e.target.dataset.index
-    console.log(e.target.dataset)
     const arr = that.data.tasks
     const _id = arr[index]._id
     const db = wx.cloud.database()
@@ -71,12 +112,12 @@ Page({
     that.setData({
       tasks: arr
     })
-    wx.showToast({
-      title: '删除成功',
-      icon: 'succes',
-      duration: 1000,
-      mask: true
-    })
+    // wx.showToast({
+    //   title: '删除成功',
+    //   icon: 'succes',
+    //   duration: 1000,
+    //   mask: true
+    // })
   },
 
   /**
