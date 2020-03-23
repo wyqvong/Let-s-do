@@ -15,6 +15,7 @@ Page({
 
   getLastId: function () {
     const that = this
+
     const db = wx.cloud.database()
     db.collection('places').where({}).orderBy('id', 'desc').limit(1).get({
       success: function (res) {
@@ -39,15 +40,20 @@ Page({
     if (that.data.name && that.data.address && that.data.latitude && that.data.longitude) {
       try {
         function p(res, rej) {
-          const db = wx.cloud.database()
-          db.collection('places').add({
+          wx.cloud.callFunction({
+            name: 'dbAdd',
             data: {
-              id: that.data.id,
-              placeAddress: that.data.address,
-              placeLatitude: that.data.latitude,
-              placeLongitude: that.data.longitude,
-              placeName: that.data.name
+              dbName: 'places',
+              data: {
+                id: that.data.id,
+                placeAddress: that.data.address,
+                placeLatitude: that.data.latitude,
+                placeLongitude: that.data.longitude,
+                placeName: that.data.name
+              }
             }
+          }).then(res=>{
+            console.log(res)
           })
           res(true)
         }
@@ -56,7 +62,7 @@ Page({
             title: '提交成功',
           })
           that.setData({
-            id: that.data.id+1,
+            id: that.data.id + 1,
             address: '',
             latitude: '23.259104',
             longitude: '113.456706',
