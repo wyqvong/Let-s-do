@@ -69,14 +69,6 @@ Page({
 
   getAllTask: function () {
     const that = this;
-    // const db = wx.cloud.database();
-    // db.collection('msgTask').where({
-    //   _openid: that.data.openid
-    // }).get({
-    //   success: function (res) {
-    //     console.log(res)
-    //   }
-    // })
     wx.cloud.callFunction({
       name: 'getAllTask'
     }).then(res => {
@@ -110,8 +102,6 @@ Page({
     const that = this
     const arr = that.data.tasks
     const _id = arr[index]._id
-    // const db = wx.cloud.database()
-    // db.collection('msgTask').doc(_id).remove()
     wx.cloud.callFunction({
       name: 'dbRemove',
       data: {

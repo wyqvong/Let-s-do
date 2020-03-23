@@ -70,28 +70,27 @@ Page({
   // 查询数据库的地址集合
   getLocations: function () {
     const that = this
-    const db = wx.cloud.database()
-    db.collection('places').get({
-      success: function (res) {
-        const locations = res.data
-        that.setData({
-          locations: locations
-        })
-        // 形成maekers数组集合
-        wx.getLocation({
-          type: 'wgs84', //返回可以用于wx.openLocation的经纬度
-          success: (res) => {
-            that.setData({
-              markers: that.getSchoolMarkers(),
-              // scale: 12,
-              // longitude: res.longitude,
-              // latitude: res.latitude
-              // longitude: '108.653665',
-              // latitude: '35.067043'
-            })
-          }
-        })
-      }
+    wx.cloud.callFunction({
+      name: 'getLocations'
+    }).then(res => {
+      const locations = res.result.data
+      that.setData({
+        locations: locations
+      })
+      // 形成maekers数组集合
+      wx.getLocation({
+        type: 'wgs84', //返回可以用于wx.openLocation的经纬度
+        success: (res) => {
+          that.setData({
+            markers: that.getSchoolMarkers(),
+            // scale: 12,
+            // longitude: res.longitude,
+            // latitude: res.latitude
+            // longitude: '108.653665',
+            // latitude: '35.067043'
+          })
+        }
+      })
     })
   },
 
@@ -125,7 +124,7 @@ Page({
       }).catch(res => {
         console.log("获取openid失败", res)
       })
-    }else{
+    } else {
       wx.showToast({
         title: '表单不能为空',
         icon: 'none',
