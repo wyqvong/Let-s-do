@@ -15,18 +15,14 @@ Page({
 
   getLastId: function () {
     const that = this
-
-    const db = wx.cloud.database()
-    db.collection('places').where({}).orderBy('id', 'desc').limit(1).get({
-      success: function (res) {
-        const id = (res.data[0].id) + 1
-        console.log(id)
-        that.setData({
-          id: id
-        })
-      }
+    wx.cloud.callFunction({
+      name: 'getLastId'
+    }).then(res => {
+      const id = (res.result.data[0].id) + 1
+      that.setData({
+        id: id
+      })
     })
-
   },
 
   bindKeyInput: function (e) {
@@ -52,7 +48,7 @@ Page({
                 placeName: that.data.name
               }
             }
-          }).then(res=>{
+          }).then(res => {
             console.log(res)
           })
           res(true)
