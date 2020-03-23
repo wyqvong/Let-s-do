@@ -77,6 +77,8 @@
 
 - 3.13 完善样式
 
+- 3.23 把涉及操作数据库的语句整理到云函数统一调度，贯彻落实前后端分离
+
 ## 小程序开发参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
