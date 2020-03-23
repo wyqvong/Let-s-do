@@ -4,5 +4,5 @@ page,view,image,swiper,swiper-item,navigator,video{
   
 }
 page{
-  background-color: rgb(212, 212, 212);
+  background-color: rgb(255, 255, 255);
 }

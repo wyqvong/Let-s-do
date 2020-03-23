@@ -63,35 +63,39 @@ Page({
       })
       this.getAllTask()
     }).catch(res => {
-      console.log("获取openid失败", res)
+      console.log("获取失败", res)
     })
   },
 
   getAllTask: function () {
-    const db = wx.cloud.database()
     const that = this;
-    db.collection('msgTask').where({
-      _openid: this.data.openid
-    }).get({
-      success: function (res) {
-        const all = res.data;
-        let tasks = [];
-        for (let i = 0; i < all.length; i++) {
-          let item = {
-            _id: all[i]._id,
-            course: all[i].data.formData.course,
-            time: all[i].data.formData.time,
-            date: all[i].data.formData.date,
-            address: all[i].data.formData.address,
-            room: all[i].data.formData.room
-          }
-          tasks.push(item)
+    // const db = wx.cloud.database();
+    // db.collection('msgTask').where({
+    //   _openid: that.data.openid
+    // }).get({
+    //   success: function (res) {
+    //     console.log(res)
+    //   }
+    // })
+    wx.cloud.callFunction({
+      name: 'getAllTask'
+    }).then(res => {
+      const all = res.result.data;
+      let tasks = [];
+      for (let i = 0; i < all.length; i++) {
+        let item = {
+          _id: all[i]._id,
+          course: all[i].data.formData.course,
+          time: all[i].data.formData.time,
+          date: all[i].data.formData.date,
+          address: all[i].data.formData.address,
+          room: all[i].data.formData.room
         }
-        that.setData({
-          tasks: tasks
-        })
-
+        tasks.push(item)
       }
+      that.setData({
+        tasks: tasks
+      })
     })
   },
   //删除数组指定位置的元素
@@ -131,14 +135,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getUserInfo()
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getAllTask()
+    this.getUserInfo()
   },
 
   /**
