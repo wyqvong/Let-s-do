@@ -110,8 +110,17 @@ Page({
     const that = this
     const arr = that.data.tasks
     const _id = arr[index]._id
-    const db = wx.cloud.database()
-    db.collection('msgTask').doc(_id).remove()
+    // const db = wx.cloud.database()
+    // db.collection('msgTask').doc(_id).remove()
+    wx.cloud.callFunction({
+      name: 'dbRemove',
+      data: {
+        dbName: 'msgTask',
+        dbParameter: _id
+      }
+    }).then(res=>{
+      console.log("删除成功")
+    })
     this.arrRemove(arr, index)
     that.setData({
       tasks: arr
