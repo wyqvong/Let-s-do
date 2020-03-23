@@ -108,16 +108,14 @@ Page({
 
   // 查询所有食物
   getAll: function () {
-    const db = wx.cloud.database()
-    const that = this;
-    db.collection('foods').get({
-      success: function (res) {
-        const all = res.data;
-        console.log(all)
-        that.setData({
-          array: all
-        })
-      }
+    const that = this
+    wx.cloud.callFunction({
+      name: 'getAllFoods'
+    }).then(res => {
+      const all = res.result.data
+      that.setData({
+        array: all
+      })
     })
   },
 
