@@ -8,8 +8,7 @@ Page({
     visible5: false,
     openid: null,
     tasks: [],
-    actions5: [
-      {
+    actions5: [{
         name: '取消'
       },
       {
@@ -28,7 +27,9 @@ Page({
     });
   },
 
-  delete({ detail }) {
+  delete({
+    detail
+  }) {
     if (detail.index === 0) {
       this.setData({
         visible5: false
@@ -51,7 +52,7 @@ Page({
     }
   },
 
-  getUserInfo: function () {
+  getUserInfo: function() {
     let that = this
     wx.cloud.callFunction({
       name: 'getUserInfo',
@@ -67,7 +68,7 @@ Page({
     })
   },
 
-  getAllTask: function () {
+  getAllTask: function() {
     const that = this;
     wx.cloud.callFunction({
       name: 'getAllTask'
@@ -91,14 +92,14 @@ Page({
     })
   },
   //删除数组指定位置的元素
-  arrRemove: function (arr, index) {
+  arrRemove: function(arr, index) {
     console.log(arr)
     if (index > -1) {
       arr.splice(index, 1);
     }
   },
 
-  deleteTask: function (index) {
+  deleteTask: function(index) {
     const that = this
     const arr = that.data.tasks
     const _id = arr[index]._id
@@ -107,75 +108,78 @@ Page({
       data: {
         dbName: 'msgTask',
         dbParameter: _id
+      },
+      success: res => {
+        console.log(res)
+        console.log("删除成功")
+        that.arrRemove(arr, index)
+        that.setData({
+          tasks: arr
+        })
       }
-    }).then(res=>{
-      console.log("删除成功")
+      // wx.showToast({
+      //   title: '删除成功',
+      //   icon: 'succes',
+      //   duration: 1000,
+      //   mask: true
+      // })
+
     })
-    this.arrRemove(arr, index)
-    that.setData({
-      tasks: arr
-    })
-    // wx.showToast({
-    //   title: '删除成功',
-    //   icon: 'succes',
-    //   duration: 1000,
-    //   mask: true
-    // })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.getUserInfo()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
