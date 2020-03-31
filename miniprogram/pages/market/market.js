@@ -9,9 +9,9 @@ Page({
   data: {
     longitude: '113.456706',
     latitude: '23.259104',
-    markers: [],//标记集合
-    scale: '20',//地图视野范围
-    locations: [],//地点集合
+    markers: [], //标记集合
+    scale: '20', //地图视野范围
+    locations: [], //地点集合
     course: '',
     address: '',
     room: '',
@@ -42,33 +42,37 @@ Page({
   //   });
   // },
 
-  bindKeyInput1: function (e) {
+  bindKeyInput1: function(e) {
     this.setData({
       course: e.detail.value
     })
   },
 
-  bindKeyInput2: function (e) {
+  bindKeyInput2: function(e) {
     this.setData({
       address: e.detail.value
     })
   },
 
-  bindKeyInput3: function (e) {
+  bindKeyInput3: function(e) {
     this.setData({
       room: e.detail.value
     })
   },
 
   changeDate(e) {
-    this.setData({ date: e.detail.value });
+    this.setData({
+      date: e.detail.value
+    });
   },
   changeTime(e) {
-    this.setData({ time: e.detail.value });
+    this.setData({
+      time: e.detail.value
+    });
   },
 
   // 查询数据库的地址集合
-  getLocations: function () {
+  getLocations: function() {
     const that = this
     wx.cloud.callFunction({
       name: 'getLocations'
@@ -94,36 +98,50 @@ Page({
     })
   },
 
-  addMarker: function () {
+  addMarker: function() {
     wx.navigateTo({
       url: '../addMarker/addMarker',
-      success: function (res) {
+      success: function(res) {
         // 通过eventChannel向被打开页面传送数据
         console.log("成功跳转到addMarker")
       }
     })
   },
 
-  formSubmit: function (e) {
+  formSubmit: function(e) {
     let that = this
     if (that.data.course && that.data.address && that.data.time && that.data.date && that.data.room) {
-      that.shouquan()
-      wx.cloud.callFunction({
-        name: 'getUserInfo',
-      }).then(res => {
-        let openid = res.result.openid
-        console.log('云函数获取到的openid: ', openid)
-        const formData = {
-          date: that.data.date,
-          time: that.data.time,
-          course: that.data.course,
-          address: that.data.address,
-          room: that.data.room
-        }
-        that.send(openid, formData)
-      }).catch(res => {
-        console.log("获取openid失败", res)
+      new Promise((reslove,reject)=>{
+        wx.requestSubscribeMessage({
+          tmplIds: ['hzkDjEh9rV9ljQW5zIFoyLGr3RtmLv28L4vjqaSz3bg'], //消息模板
+          success(res) {
+            reslove(res)
+          },
+          fail(res) {
+            reject(res)
+          }
+        })
+      }).then((res) => {
+        wx.cloud.callFunction({
+          name: 'getUserInfo',
+        }).then(res => {
+          let openid = res.result.openid
+          console.log('云函数获取到的openid: ', openid)
+          const formData = {
+            date: that.data.date,
+            time: that.data.time,
+            course: that.data.course,
+            address: that.data.address,
+            room: that.data.room
+          }
+          that.send(openid, formData)
+        }).catch(res => {
+          console.log("获取openid失败", res)
+        })
+      },(res)=>{
+        console.log('失败' + res)
       })
+
     } else {
       wx.showToast({
         title: '表单不能为空',
@@ -135,14 +153,16 @@ Page({
   },
 
   //用户授权订阅消息
-  shouquan: function () {
+  shouquan: function(reslove, reject) {
     wx.requestSubscribeMessage({
-      tmplIds: ['hzkDjEh9rV9ljQW5zIFoyLGr3RtmLv28L4vjqaSz3bg'],//消息模板
+      tmplIds: ['hzkDjEh9rV9ljQW5zIFoyLGr3RtmLv28L4vjqaSz3bg'], //消息模板
       success(res) {
         console.log('授权成功', res)
+        reslove(res)
       },
       fail(res) {
         console.log('授权失败', res)
+        reject(res)
       }
     })
   },
@@ -197,7 +217,7 @@ Page({
   //点击标记点时触发
   markertap(e) {
     const that = this
-    let markerId = e.markerId;// 获取点击的markers  id
+    let markerId = e.markerId; // 获取点击的markers  id
     let markername = this.data.markers[markerId - 1].title; // 获取markers名称
     that.setData({
       address: markername
@@ -215,12 +235,12 @@ Page({
   },
 
   // 移动到用户当前位置
-  moveToLocation: function () {
+  moveToLocation: function() {
     this.mapCtx.moveToLocation()
   },
 
   // 处理横坐标
-  strSub: function (a) {
+  strSub: function(a) {
     var str = a.split(".")[1]
     str = str.substring(0, str.length - 1)
     return a.split(".")[0] + '.' + str
@@ -252,7 +272,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
 
 
@@ -272,7 +292,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
@@ -280,7 +300,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     //获取当前位置和标记点
     this.getLocations()
     // 使用 wx.createMapContext 获取 map 上下文 
@@ -290,35 +310,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

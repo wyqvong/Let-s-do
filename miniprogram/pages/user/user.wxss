@@ -33,3 +33,6 @@
 .task_card{
   margin: 0 20rpx;
 }
+.modal-index--i-modal-body{
+  -webkit-overflow-scrolling: touch
+}
