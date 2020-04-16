@@ -10,7 +10,7 @@
             <view class="input-content">
                 <i-panel title="Where are you going?">
                     <input class="form_input" value="{{course}}" bindinput="bindKeyInput1" type="text" placeholder="请输入课程名字" />
-                    <input class="form_input" bindinput="bindKeyInput2" value="{{address}}" type="text" placeholder="可双击地图中的标记点快速输入" maxlength="20" />
+                    <input class="form_input" bindinput="bindKeyInput2" value="{{address}}" type="text" placeholder="可双击地图中的标记点快速输入地址" maxlength="20" />
                     <input class="form_input" value="{{room}}" bindinput="bindKeyInput3" type="text" placeholder="请输入教室详细地址(最多15字)" maxlength="15" />
                 </i-panel>
             </view>
@@ -20,7 +20,7 @@
                     <view class="tui-picker-detail">{{date}}</view>
                 </picker>
                 <view class="picker-name">上课时间</view>
-                <picker mode="time" value="{{time}}" start="06:00" end="22:30" bindchange="changeTime">
+                <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="changeTime">
                     <view class="tui-picker-detail">{{time}}</view>
                 </picker>
             </view>

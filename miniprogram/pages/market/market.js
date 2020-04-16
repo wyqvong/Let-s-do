@@ -16,8 +16,8 @@ Page({
     address: '',
     room: '',
     //选择器
-    date: '2020-03-12',
-    time: '12:00',
+    date: '',
+    time: '',
     dateTimeArray: null,
     dateTime: null,
     dateTimeArray1: null,
@@ -26,21 +26,14 @@ Page({
     endYear: 2030
   },
 
-  // onLoad() {
-  //   // 获取完整的年月日 时分秒，以及默认显示的数组
-  //   var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-  //   var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-  //   // 精确到分的处理，将数组的秒去掉
-  //   var lastArray = obj1.dateTimeArray.pop();
-  //   var lastTime = obj1.dateTime.pop();
-
-  //   this.setData({
-  //     dateTime: obj.dateTime,
-  //     dateTimeArray: obj.dateTimeArray,
-  //     dateTimeArray1: obj1.dateTimeArray,
-  //     dateTime1: obj1.dateTime
-  //   });
-  // },
+  //获取当前时间
+  getNewDate(){
+    var newTime = dateTimePicker.getNewDateArry()
+    this.setData({
+      date: newTime[0]+'-'+newTime[1]+'-'+newTime[2],
+      time: newTime[3]+':'+newTime[4]
+    })
+  },
 
   bindKeyInput1: function(e) {
     this.setData({
@@ -293,7 +286,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    this.getNewDate()
   },
 
 
