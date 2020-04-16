@@ -10,7 +10,7 @@ Page({
     longitude: '113.456706',
     latitude: '23.259104',
     markers: [], //标记集合
-    scale: '20', //地图视野范围
+    scale: '16', //地图视野范围
     locations: [], //地点集合
     course: '',
     address: '',
@@ -68,13 +68,16 @@ Page({
   getLocations: function() {
     const that = this
     wx.cloud.callFunction({
-      name: 'getLocations'
-    }).then(res => {
-      const locations = res.result.data
-      that.setData({
-        locations: locations
-      })
-      // 形成maekers数组集合
+      name: 'getAdminLocations'
+    }).then(res1 => {
+      wx.cloud.callFunction({
+        name: 'getUserLocations'
+      }).then(res2 =>{
+        const locations = res1.result.data.concat(res2.result.data[0].marker)
+        that.setData({
+          locations: locations
+        })
+        // 形成maekers数组集合
       wx.getLocation({
         type: 'wgs84', //返回可以用于wx.openLocation的经纬度
         success: (res) => {
@@ -87,6 +90,7 @@ Page({
             // latitude: '35.067043'
           })
         }
+      })
       })
     })
   },
@@ -220,9 +224,11 @@ Page({
   //通过location集合处理后变成marker集合
   getSchoolMarkers() {
     var market = []
+    var id = 1
     for (let item of this.data.locations) {
-      let marker1 = this.createMarker(item)
+      let marker1 = this.createMarker(item,id)
       market.push(marker1)
+      id++
     }
     return market
   },
@@ -239,12 +245,12 @@ Page({
     return a.split(".")[0] + '.' + str
   },
 
-  createMarker(point) {
+  createMarker(point,id) {
     let latitude = this.strSub(point.placeLatitude)
     let longitude = point.placeLongitude
     let marker = {
-      iconPath: "/images/bj1.png",
-      id: point.id || 0,
+      iconPath: point._id?"/images/bj1.png":"/images/bj2.png",
+      id: id || 0,
       title: point.placeAddress || '',
       latitude: latitude,
       longitude: longitude,

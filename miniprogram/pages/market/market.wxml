@@ -2,7 +2,7 @@
 <view class="container" hover-class="none" hover-stop-propagation="false">
     <map id="myMap" style="width: 100%; height: 600rpx;" show-location show-scale bindcontroltap="controltap" bindmarkertap="markertap" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}"></map>
     <cover-view class="add_marker_view" scroll-top="0">
-        <cover-image class="add_marker_img" src="../../images/bj3.png" bindtap="addMarker"></cover-image>
+        <cover-image class="add_marker_img" src="../../images/bj2.png" bindtap="addMarker"></cover-image>
         <cover-view class="add_marker_view_view" scroll-top="0">添加标记</cover-view>
     </cover-view>
     <view class="messageTip">
