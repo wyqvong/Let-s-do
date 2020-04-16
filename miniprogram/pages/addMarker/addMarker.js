@@ -5,25 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    scale: '20',//地图视野范围
+    scale: '16',//地图视野范围
     longitude: '113.456706',
     latitude: '23.259104',
     address: '',
     name: '',
-    id: null
   },
 
-  getLastId: function () {
-    const that = this
-    wx.cloud.callFunction({
-      name: 'getLastId'
-    }).then(res => {
-      const id = (res.result.data[0].id) + 1
-      that.setData({
-        id: id
-      })
-    })
-  },
+  // getLastId: function () {
+  //   const that = this
+  //   wx.cloud.callFunction({
+  //     name: 'getLastId'
+  //   }).then(res => {
+  //     const id = (res.result.data[0].id) + 1
+  //     that.setData({
+  //       id: id
+  //     })
+  //   })
+  // },
 
   bindKeyInput: function (e) {
     this.setData({
@@ -35,13 +34,15 @@ Page({
     const that = this
     if (that.data.name && that.data.address && that.data.latitude && that.data.longitude) {
       try {
-        function p(res, rej) {
+        wx.cloud.callFunction({
+          name: 'getUserLocations'
+        }).then(res1 => {
           wx.cloud.callFunction({
             name: 'dbAdd',
             data: {
-              dbName: 'places',
+              dbName: 'users',
               data: {
-                id: that.data.id,
+                res: res1.result.data[0].marker,
                 placeAddress: that.data.address,
                 placeLatitude: that.data.latitude,
                 placeLongitude: that.data.longitude,
@@ -50,25 +51,22 @@ Page({
             }
           }).then(res => {
             console.log(res)
-          })
-          res(true)
-        }
-        new Promise(p).then(res => {
-          wx.showToast({
-            title: '提交成功',
-          })
-          that.setData({
-            id: that.data.id + 1,
-            address: '',
-            latitude: '23.259104',
-            longitude: '113.456706',
-            name: '',
+            wx.showToast({
+              title: '提交成功',
+            })
+            that.setData({
+              // id: that.data.id + 1,
+              address: '',
+              latitude: '23.259104',
+              longitude: '113.456706',
+              name: '',
+            })
           })
         })
+        
       } catch (e) {
         console.error(e)
       }
-
     } else {
       wx.showToast({
         title: '表单不能为空',
@@ -111,7 +109,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getLastId()
+    // this.getLastId()
+
   },
 
   /**
