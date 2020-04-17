@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showModalStatus: false,
     longitude: '113.456706',
     latitude: '23.259104',
     markers: [], //标记集合
@@ -196,9 +197,7 @@ Page({
       that.setData({
         course: '',
         address: '',
-        room: '',
-        date: '2020-03-12',
-        time: '12:00',
+        room: ''
       })
     }).catch(res => {
       console.log("发送信息到云函数失败", res)
@@ -219,6 +218,7 @@ Page({
     that.setData({
       address: markername
     })
+    that.showModal(e)
   },
 
   //通过location集合处理后变成marker集合
@@ -234,12 +234,12 @@ Page({
   },
 
   // 移动到用户当前位置
-  moveToLocation: function() {
+  moveToLocation() {
     this.mapCtx.moveToLocation()
   },
 
   // 处理横坐标
-  strSub: function(a) {
+  strSub(a) {
     var str = a.split(".")[1]
     str = str.substring(0, str.length - 1)
     return a.split(".")[0] + '.' + str
@@ -267,6 +267,53 @@ Page({
     return marker
   },
 
+  //显示对话框
+  showModal(event) {
+    //console.log(event.markerId);
+    var i = event.markerId;
+    var that = this;
+ 
+    // 显示遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function() {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+
+  //隐藏对话框
+  hideModal() {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function() {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
+  },
 
   /**
    * 生命周期函数--监听页面加载
