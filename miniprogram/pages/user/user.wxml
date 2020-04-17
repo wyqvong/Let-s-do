@@ -6,7 +6,8 @@
         <open-data type="userNickName"></open-data>
     </view>
     <view class="task_view" hover-class="none" hover-stop-propagation="false">
-        <i-card class="task_card" wx:for="{{tasks}}" wx:for-index="index"  title="{{item.course}}" extra="点击卡片可取消提醒" >
+        <text class="notask-text" wx:if="{{tasks.length==0}}">您没有设置任何行程</text>
+        <i-card class="task_card" wx:for="{{tasks}}" wx:for-index="index" title="{{item.course}}" extra="点击卡片可取消提醒">
             <view slot="content" data-index="{{index}}" bindtap="deleteTip">
                 <text class="task_text" selectable="false" space="false" decode="false">
                     时间：{{item.time}}

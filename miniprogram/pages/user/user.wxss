@@ -16,14 +16,25 @@
   margin: 20rpx;  
   margin-top: 50rpx;  
   border-radius: 50%;  
-  border: 2px solid #fff;  
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+  border: 2rpx solid #fff;  
+  box-shadow: 3rpx 3rpx 10rpx rgba(0, 0, 0, 0.2);  
 }  
   
 .userinfo{  
   font-size: 14px;  
   background-color: #c0c0c0;  
 }  
+
+.notask-text{
+  display: block;
+  text-align: center;
+  margin-top: 30rpx;
+  color: rgb(88, 94, 94);
+  font-weight: 600;
+}
+
+
+
 /* 列表 */
 .task_view{
   background-color: #fff;
@@ -33,6 +44,13 @@
 .task_card{
   margin: 0 20rpx;
 }
+
 .modal-index--i-modal-body{
   -webkit-overflow-scrolling: touch
+}
+
+/* 提示框按钮 */
+button{
+  width: 100% !important;
+  padding: 0 !important;
 }
