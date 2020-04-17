@@ -81,6 +81,8 @@
 
 - 4.16 把标记点分为了 系统默认标记点 和 用户自定义标记点 两种
 
+- 4.17 优化了marker、user等页面的交互和样式
+
 ## 小程序开发参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
