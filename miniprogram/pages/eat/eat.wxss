@@ -1,10 +1,11 @@
 /* pages/eat/eat.wxss *//* 今日菜单 */
 .picks{
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    align-content: flex-start;
+    justify-content: space-between; */
 }
 .picks_button{
+    margin-left: 3rpx;
     margin-bottom: 10rpx;
     /* max-width: 200rpx; */
     min-width: 50rpx;
@@ -24,7 +25,7 @@
     padding: 5rpx 25rpx;
     height: 50rpx;
     line-height: 25rpx;
-    font-size: 12px;
+    font-size: 26rpx;
     font-weight: 600;
 }
 
@@ -57,7 +58,7 @@
 .pick1_button{
     display: flex;
     flex: 2;
-    color: #FFF68F;
+    color: #FFFFFF;
     background-color: rgba(63, 212, 205, 0.699);
     margin-right: 20rpx;
     text-shadow: 0px 2px 1px #83ACDB;
@@ -83,7 +84,7 @@
     display: flex;
     margin-right: 20rpx;
     width: 100rpx;
-    color: #FFF68F;
+    color: #FFFFFF;
     background-color: rgba(63, 212, 205, 0.699);
     flex: 1.8;
 }
@@ -108,7 +109,7 @@
 /* 冲冲冲按钮 */
 .getLucky_button{
     margin-top: 30rpx;
-    background-color: rgb(250, 123, 76);
+    background-color: rgb(95, 170, 255);
     color: white;
     text-shadow: 0px 2px 1px #83ACDB;
 }

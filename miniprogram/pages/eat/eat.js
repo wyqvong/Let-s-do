@@ -39,9 +39,6 @@ Page({
     const index = that.data.index
     const news = that.data.array[index].name
     that.addpicks(news)
-    that.setData({
-      index: 0
-    })
     wx.showToast({
       title: '添加成功',
       icon: 'succes',
