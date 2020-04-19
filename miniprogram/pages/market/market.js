@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    maph: 100,
     showModalStatus: false,
     longitude: '113.456706',
     latitude: '23.259104',
@@ -17,6 +16,8 @@ Page({
     course: '',
     address: '',
     room: '',
+    _id:'',
+    isShare: false,
     //选择器
     date: '',
     time: '',
@@ -75,28 +76,34 @@ Page({
       wx.cloud.callFunction({
         name: 'getUserLocations'
       }).then(res2 =>{
-        const locations = res1.result.data.concat(res2.result.data[0].marker)
-        that.setData({
-          locations: locations
-        })
-        // 形成maekers数组集合
-      wx.getLocation({
-        type: 'wgs84', //返回可以用于wx.openLocation的经纬度
-        success: (res) => {
+        return new Promise(()=>{
+          const locations = res1.result.data.concat(res2.result.data[0].marker)
+          console.log("--------------获取locations-----------")
           that.setData({
-            markers: that.getSchoolMarkers(),
-            // scale: 12,
-            // longitude: res.longitude,
-            // latitude: res.latitude
-            // longitude: '108.653665',
-            // latitude: '35.067043'
+            locations: locations
           })
-        }
+          // 形成maekers数组集合
+          wx.getLocation({
+            type: 'wgs84', //返回可以用于wx.openLocation的经纬度
+            success: (res) => {
+              console.log("--------------获取markers-----------")
+              that.setData({
+              markers: that.getSchoolMarkers(),
+              // scale: 12,
+              // longitude: res.longitude,
+              // latitude: res.latitude
+              // longitude: '108.653665',
+              // latitude: '35.067043'
+              })
+            }
+          })
+        })
       })
-      })
+    }).catch(err=>{
+      console.log(err)
     })
   },
-
+  //跳转到addMarker添加新标记点
   addMarker: function() {
     wx.navigateTo({
       url: '../addMarker/addMarker',
@@ -107,6 +114,7 @@ Page({
     })
   },
 
+  //提交表单
   formSubmit: function(e) {
     let that = this
     if (that.data.course && that.data.address && that.data.time && that.data.date && that.data.room) {
@@ -207,17 +215,21 @@ Page({
 
 
   // 点击控件时触发
-  controltap(e) {
-    this.moveToLocation()
-  },
+  // controltap(e) {
+  //   this.moveToLocation()
+  // },
 
   //点击标记点时触发
   markertap(e) {
     const that = this
     let markerId = e.markerId; // 获取点击的markers  id
     let markername = this.data.markers[markerId - 1].title; // 获取markers名称
+    let longitude = this.data.markers[markerId -1].longitude
+    let latitude = this.data.markers[markerId -1].latitude
     that.setData({
-      address: markername
+      longitude: longitude,
+      latitude: latitude,
+      address: markername,
     })
     that.showModal(e)
   },
@@ -231,12 +243,35 @@ Page({
       market.push(marker1)
       id++
     }
+    console.log(this.data.isShare)
+    if(this.data.isShare){ 
+      let item = {
+        longitude: this.data.longitude,
+        latitude: this.data.latitude,
+        iconPath:"/images/bj3.png",
+        id: id,
+        label: {
+          x: -24,
+          y: -26,
+          content: '',
+          color: "#575757",
+          bgColor: "#ffffff"
+        },
+        width: 30,
+        height: 30
+      }
+      market.push(item)
+    }
     return market
   },
 
-  // 移动到用户当前位置
+  // 移动地图的当前位置
   moveToLocation() {
-    this.mapCtx.moveToLocation()
+    console.log("---------定位---------")
+    this.mapCtx.moveToLocation({
+      longitude: this.longitude,
+      latitude: this.latitude
+    })
   },
 
   // 处理横坐标
@@ -258,7 +293,7 @@ Page({
       label: {
         x: -24,
         y: -26,
-        content: point.placeName,
+        content: point.placeName||'',
         color: "#575757",
         bgColor: "#ffffff"
       },
@@ -284,7 +319,6 @@ Page({
     this.setData({
       animationData: animation.export(),
       showModalStatus: true,
-      maph:37
     })
     setTimeout(function() {
       animation.translateY(0).step()
@@ -306,7 +340,6 @@ Page({
     animation.translateY(300).step()
     this.setData({
       animationData: animation.export(),
-      maph:100
     })
     setTimeout(function() {
       animation.translateY(0).step()
@@ -322,19 +355,14 @@ Page({
    */
   onLoad: function(options) {
     console.log(options)
-
-
-    // wx.getSystemInfo({
-    //   success: function (res) {
-    //     //设置map高度，根据当前设备宽高满屏显示
-    //     that.setData({
-    //       view: {
-    //         Height: res.windowHeight
-    //       },
-
-    //     })
-    //   }
-    // })
+    if(options.latitude&&options.longitude){
+      this.setData({
+        latitude : options.latitude,
+        longitude: options.longitude,
+        isShare : true
+      })
+      console.log("-----------初始化定位点------------")
+    }
   },
 
   /**
@@ -342,6 +370,7 @@ Page({
    */
   onReady: function() {
     this.getNewDate()
+    // this.moveToLocation()
   },
 
 
@@ -353,6 +382,7 @@ Page({
     this.getLocations()
     // 使用 wx.createMapContext 获取 map 上下文 
     this.mapCtx = wx.createMapContext('myMap')
+    
   },
 
   /**
@@ -386,7 +416,29 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {
+      // 通过按钮触发
+      var data = res.target.dataset
+      return {
+        title: data.title,
+        path: '/pages/market/market?longitude='+data.longitude+'&latitude='+data.latitude,
+        // imageUrl: '/images/aikepler-logo.jpeg',
+        success: function (res) {
+          // 转发成功
+          console.log('转发成功')
+        },
+        fail: function (res) {
+          // 转发失败
+          console.log('转发失败')
+        }
+      }
+    }
+    //通过右上角菜单触发
+    return {
+      title: 'Let‘s do',
+      path: "/pages/market/market",
+      // imageUrl: '/images/aikepler-logo.jpeg'
+    };
   }
 })

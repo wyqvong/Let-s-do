@@ -51,10 +51,40 @@
     background-color: #fff;
 }
 
+/* 分享标记点图标 */
+.share_marker{
+    width: 100rpx;
+    height: 100rpx;
+    position: fixed;
+    bottom: 5rpx;
+    right: 35rpx;
+    /* background: rgb(125, 255, 143); */
+    border-radius: 2rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+.share_marker_img{
+    width: 60rpx;
+    height: 60rpx;
+}
+.share_marker_text{
+    font-size: 20rpx;
+}
+.share_marker button{
+    position: absolute;
+    height: 100rpx;
+    width: 100rpx !important;
+    opacity: 0.1;
+    z-index: 99;
+}
+
 /*底部弹窗开始 -使屏幕变暗  */
 .coverview_screen {
     width: 100%;
-    height: 31vh;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -66,6 +96,7 @@
 }
 
 .coverview_box {
+    background-color: #fff;
     width: 100%;
     height: 760rpx;
     overflow: hidden;

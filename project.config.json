@@ -61,6 +61,14 @@
 					"pathName": "pages/market/market",
 					"query": "address= \"广东技术师范大学天河学院-图书馆\"",
 					"scene": 1014
+				},
+				{
+					"id": 2,
+					"name": "pages/market/market",
+					"pathName": "pages/market/market",
+					"query": "longitude= 113.454330&latitude=23.26161",
+					"scene": 1036,
+					"referrerInfo": {}
 				}
 			]
 		}
