@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    maph: 100,
     showModalStatus: false,
     longitude: '113.456706',
     latitude: '23.259104',
@@ -272,7 +273,6 @@ Page({
     //console.log(event.markerId);
     var i = event.markerId;
     var that = this;
- 
     // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 200,
@@ -283,7 +283,8 @@ Page({
     animation.translateY(300).step()
     this.setData({
       animationData: animation.export(),
-      showModalStatus: true
+      showModalStatus: true,
+      maph:37
     })
     setTimeout(function() {
       animation.translateY(0).step()
@@ -305,6 +306,7 @@ Page({
     animation.translateY(300).step()
     this.setData({
       animationData: animation.export(),
+      maph:100
     })
     setTimeout(function() {
       animation.translateY(0).step()
