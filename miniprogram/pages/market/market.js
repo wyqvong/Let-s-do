@@ -248,6 +248,7 @@ Page({
       let item = {
         longitude: this.data.longitude,
         latitude: this.data.latitude,
+        title: this.data.address,
         iconPath:"/images/bj3.png",
         id: id,
         label: {
@@ -359,6 +360,7 @@ Page({
       this.setData({
         latitude : options.latitude,
         longitude: options.longitude,
+        address: options.address,
         isShare : true
       })
       console.log("-----------初始化定位点------------")
@@ -421,8 +423,8 @@ Page({
       // 通过按钮触发
       var data = res.target.dataset
       return {
-        title: data.title,
-        path: '/pages/market/market?longitude='+data.longitude+'&latitude='+data.latitude,
+        title: data.address,
+        path: '/pages/market/market?longitude='+data.longitude+'&latitude='+data.latitude+'&address='+data.address,
         // imageUrl: '/images/aikepler-logo.jpeg',
         success: function (res) {
           // 转发成功

@@ -32,7 +32,7 @@
                 <view class="share_marker" hover-class="none" hover-stop-propagation="false">
                     <image class="share_marker_img" src="../../images/fx1.png"></image>
                     <text class="share_marker_text">分享标记点</text>
-                    <button open-type="share" data-longitude="{{ longitude }}" data-latitude="{{ latitude }}" data-title="{{address}}"></button>
+                    <button open-type="share" data-longitude="{{ longitude }}" data-latitude="{{ latitude }}" data-address="{{address}}"></button>
                 </view>
             </form>
         </view>
